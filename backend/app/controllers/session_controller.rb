@@ -1,8 +1,6 @@
 class SessionController < ApplicationController
 
     def signup
-        puts 'Users Controller Reached!!'
-        puts '--------------------------'
         User.create(user_params)
         users = User.all
         render :json => users

@@ -4,23 +4,19 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    let options = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        first_name: "Test",
-        last_name: "User",
-        password: "password",
-        email: "test@user.com"
-      }),
-    }
 
-    fetch("http://localhost:3000/signup", options)
-      .then(res => res.json)
-      .then(data => console.log(data))
+    // fetch("http://localhost:3000/users/2/user_stocks", {
+    //   method: 'Post',
+    //   headers: {
+    //     'Content-Type': "application/json",
+    //     'Accept': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     stock_symbol: 'AAPL'
+    //   })
+    // })
+    // .then(res => res.json())
+    // .then(data => console.log(data))
 
   }
   
