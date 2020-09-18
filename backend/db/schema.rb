@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_030737) do
+ActiveRecord::Schema.define(version: 2020_09_18_031244) do
 
   create_table "user_stocks", force: :cascade do |t|
     t.integer "user_id"
     t.string "stock_symbol"
+  end
+
+  create_table "user_videos", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "video_id"
   end
 
   create_table "users", force: :cascade do |t|
