@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post '/signup', to: 'session#signup'
+  get '/login', to: 'session#login'
+  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :user_stocks, only: [:create, :destroy]
+    resources :user_videos, only: [:create, :destroy]
+  end
 end
