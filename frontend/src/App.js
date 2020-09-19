@@ -5,18 +5,19 @@ class App extends Component {
 
   componentDidMount() {
 
-    // fetch("http://localhost:3000/users/2/user_stocks", {
-    //   method: 'Post',
-    //   headers: {
-    //     'Content-Type': "application/json",
-    //     'Accept': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     stock_symbol: 'AAPL'
-    //   })
-    // })
-    // .then(res => res.json())
-    // .then(data => console.log(data))
+    fetch("http://localhost:3000/users/3/user_stocks/AAPL", {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': "application/json",
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: "3",
+        stock_symbol: "AAPL"
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
 
   }
   

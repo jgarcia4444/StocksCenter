@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   post '/signup', to: 'session#signup'
-  get '/login', to: 'session#login'
+  post '/login', to: 'session#login'
   resources :users, only: [:show]
   resources :users, only: [:show] do
     resources :user_stocks, only: [:create, :destroy]
