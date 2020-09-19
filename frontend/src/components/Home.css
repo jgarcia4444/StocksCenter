@@ -1,0 +1,11 @@
+.Home {
+    background-color: white;
+    padding: 5%;  
+    box-shadow: 10px 10px 20px #222, 15px 15px 40px #555, 20px 20px 60px #888;
+    border-radius: 10px;
+  }
+  
+  .home-title {
+    text-align: center;
+    font-weight: 300;
+  }
