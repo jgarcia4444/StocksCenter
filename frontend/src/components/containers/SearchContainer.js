@@ -3,19 +3,20 @@ import SearchBar from '../SearchBar';
 
 export default class SearchContainer extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
+    
+        state = {
             searchSymbolQuery: ""
         }
-    }
+
+        handleFormSubmitted = (symbol) => {
+            console.log(`${symbol}, sent from search container`)
+        }
 
     render() {
         return (
             <div className="container search-container">
                 <h3>Search Stocks</h3>
-                <SearchBar />
+                <SearchBar fetchSymbolData={this.handleFormSubmitted} />
             </div>
         )
     }

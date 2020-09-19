@@ -10,6 +10,7 @@ export default class SearchBar extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.props.fetchSymbolData(this.state.searchBarText)
     }
 
     handleChange = (e) => {
