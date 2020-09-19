@@ -6,7 +6,7 @@ import SearchContainer from './containers/SearchContainer'
 const Home = () => {
     return (
         <div className="Home container">
-            <h1 class="home-title">StocksCenter</h1>
+            <h1 className="home-title">StocksCenter</h1>
             <Nav />
             <SearchContainer />
         </div>
