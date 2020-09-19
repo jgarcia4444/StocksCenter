@@ -1,12 +1,14 @@
 import React from 'react';
 import Nav from './Nav';
 import './Home.css';
+import SearchContainer from './containers/SearchContainer'
 
 const Home = () => {
     return (
         <div className="Home container">
             <h1 class="home-title">StocksCenter</h1>
             <Nav />
+            <SearchContainer />
         </div>
     )
 }
