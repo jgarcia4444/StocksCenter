@@ -5,16 +5,12 @@ class App extends Component {
 
   componentDidMount() {
 
-    fetch("http://localhost:3000/users/3/user_videos/1", {
-      method: 'DELETE',
+    fetch("http://localhost:3000/users/3", {
+      method: 'GET',
       headers: {
         'Content-Type': "application/json",
         'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        user_id: "3",
-        video_id: "1"
-      })
     })
     .then(res => res.json())
     .then(data => console.log(data))
