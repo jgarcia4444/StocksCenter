@@ -1,6 +1,10 @@
 class UserVideosController < ApplicationController
     def create
         puts 'Video Favorited'
+        new_user_video = UserVideo.create(user_videos_params)
+        if new_user_video
+            render :json => {new_user_video: new_user_video, message: "User favorited video with video_id: #{params[:user_video][:video_id]}"}
+        end
     end
 
     def destroy
@@ -13,4 +17,11 @@ class UserVideosController < ApplicationController
             render :json => {video_id: video_id, message: "The video at video_id: #{video_id} has been removed from the users favorites."}
         end
     end
+
+    private
+
+    def user_videos_params
+        params.require(:user_video).permit(:video_id, :user_id)
+    end
+
 end

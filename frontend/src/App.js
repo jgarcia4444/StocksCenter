@@ -5,7 +5,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    fetch("http://localhost:3000/users/3/user_videos/2", {
+    fetch("http://localhost:3000/users/3/user_videos/1", {
       method: 'DELETE',
       headers: {
         'Content-Type': "application/json",
