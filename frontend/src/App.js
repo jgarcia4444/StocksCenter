@@ -5,7 +5,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    fetch("http://localhost:3000/users/3/user_stocks/AAPL", {
+    fetch("http://localhost:3000/users/3/user_videos/2", {
       method: 'DELETE',
       headers: {
         'Content-Type': "application/json",
@@ -13,7 +13,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         user_id: "3",
-        stock_symbol: "AAPL"
+        video_id: "1"
       })
     })
     .then(res => res.json())
