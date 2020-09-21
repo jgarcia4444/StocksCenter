@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SearchBar from '../SearchBar';
+import Suggestions from '../Suggestions';
 
 export default class SearchContainer extends Component {
 
@@ -15,22 +16,38 @@ export default class SearchContainer extends Component {
     }
 
     state = {
-        searchSymbolQuery: "",
-        stocksData: []
+        searchQuery: "",
+        stocksData: [],
+        suggestions: []
     }
 
-    handleFormSubmitted = (symbol) => {
-        console.log(`${symbol}, sent from search container`)
+    handleFormSubmitted = (e) => {
+        e.preventDefault();
+        console.log(`${this.state.searchQuery}, sent from search container`)
+    }
+
+    handleInputChange = (query) => {
         this.setState({
-            searchSymbolQuery: symbol
+            ...this.state,
+            searchQuery: query
         })
+        let data = this.state.stocksData.map(data => {
+            return {
+                symbol: data.symbol,
+                name: data.name
+            }
+        })
+        
     }
 
     render() {
         return (
             <div className="container search-container">
                 <h3>Search Stocks</h3>
-                <SearchBar fetchSymbolData={this.handleFormSubmitted} />
+                <SearchBar suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSymbolData={this.handleFormSubmitted} />
+                <div className="suggestions-component">
+                    <Suggestions suggestions={this.state.stocksData} />
+                </div>
             </div>
         )
     }
