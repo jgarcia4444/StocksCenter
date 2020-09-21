@@ -5,10 +5,10 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-           <form onSubmit={this.props.fetchSymbolData}>
+           <form onSubmit={this.props.fetchSearchData}>
                 <div className="row form-group">
                     <div className="col-8">
-                        <input name="searchBarText" type="text" onChange={(e) => this.props.setSearchQuery(e.target.value)} className="form-control" />
+                        <input name="searchBarText" type="text" onChange={(e) => this.props.setSearchQuery(e)} className="form-control" />
                         <small>Search by stock symbol.</small>
                     </div>
                     <div className="col-4">

@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
-import Suggestion from './Suggestion';
+import Suggestion from '../Suggestion';
 
 export default class SuggestionsContainer extends Component {
     
-    
-    state = {
-        hasSuggestions: false,
+    constructor(props) {
+        super(props)
+        this.state = {
+            hasSuggestions: false,
+        }
     }
+    
 
     componentDidMount() {
-        if (this.props.suggestions.length < 1) {
+        if (this.props.suggestions !== []) {
             this.setState({
-                hasSuggestions: false
+                hasSuggestions: true
             })
         } else {
             this.setState({
-                hasSuggestions: true
+                hasSuggestions: false
             })
         }
     }
