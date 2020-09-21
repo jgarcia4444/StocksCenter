@@ -5,7 +5,7 @@ const Suggestion = (props) => {
     let {stock} = props
 
     return (
-        <div onClick={(stock) => props.clickOnSuggestion(stock)} key={stock.symbol} className="suggestion-conatiner">
+        <div onClick={() => props.handleClick(stock)} key={stock.symbol} className="suggestion-conatiner">
             <h4 className="suggestion-stock-name">{stock.name}</h4>
             <small className="suggestion-stock-symbol">{stock.symbol}</small>
         </div>
