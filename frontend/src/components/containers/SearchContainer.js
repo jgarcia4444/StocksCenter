@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SearchBar from '../SearchBar';
-import Suggestions from '../Suggestions';
+import SuggestionsContainer from '../SuggestionsContainer';
 
 export default class SearchContainer extends Component {
 
@@ -31,12 +31,13 @@ export default class SearchContainer extends Component {
             ...this.state,
             searchQuery: query
         })
-        let data = this.state.stocksData.map(data => {
-            return {
-                symbol: data.symbol,
-                name: data.name
-            }
-        })
+
+        // suggestions logic
+        this.filterBYQuery(query)
+    }
+
+    filterQuery = (query) => {
+        let suggestions = this.state.stocksData.filter(stock => stock.name.toLowerCase().contains(query))
         
     }
 
@@ -46,7 +47,7 @@ export default class SearchContainer extends Component {
                 <h3>Search Stocks</h3>
                 <SearchBar suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSymbolData={this.handleFormSubmitted} />
                 <div className="suggestions-component">
-                    <Suggestions suggestions={this.state.stocksData} />
+                    <SuggestionsContainer suggestions={this.state.stocksData} />
                 </div>
             </div>
         )
