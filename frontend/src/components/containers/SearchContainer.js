@@ -4,9 +4,10 @@ import SuggestionsContainer from './SuggestionsContainer';
 
 export default class SearchContainer extends Component {
 
+    let 
     fetchSearchStock = () => {
         let apiKey = process.env.REACT_APP_STOCKS_API_KEY
-        fetch(`http://api.marketstack.com/v1/tickers?access_key=${apiKey}`)
+        fetch(`${this.state.BaseUrl}/tickers?access_key=${apiKey}`)
             .then(res => res.json())
             .then(json => this.setState({
                 stocksData: json.data
@@ -16,9 +17,11 @@ export default class SearchContainer extends Component {
     constructor() {
         super()
         this.state = {
+            BaseUrl: "http://api.marketstack.com/v1",
             searchQuery: "",
             stocksData: [],
-            suggestions: []
+            suggestions: [],
+            selectedStockSymbol: ""
         }
         
     }
@@ -26,8 +29,6 @@ export default class SearchContainer extends Component {
     componentDidMount() {
         this.fetchSearchStock()
     }
-
-    
 
     handleFormSubmitted = (e) => {
         e.preventDefault();
@@ -61,7 +62,6 @@ export default class SearchContainer extends Component {
                 searchQuery: ""
             })
         }
-        
     }
 
     render() {
@@ -69,8 +69,9 @@ export default class SearchContainer extends Component {
             <div className="container search-container">
                 <h3>Search Stocks</h3>
                 <SearchBar suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
+                <h4>{this.state.selectedStockSymbol ? `${this.state.selectedStockSymbol} Stock Info` : "Suggestions"}</h4>
                 <div className="suggestions-component">
-                    <SuggestionsContainer suggestions={this.state.suggestions} />
+                    {this.state.selectedStockSymbol !== "" ? this.state.selectedStockSymbol : <SuggestionsContainer suggestions={this.state.suggestions} />}
                 </div>
             </div>
         )

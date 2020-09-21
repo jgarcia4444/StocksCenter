@@ -27,10 +27,15 @@ export default class SuggestionsContainer extends Component {
         return (
             this.props.suggestions.map(stock => {
                 return (
-                    <Suggestion key={stock.symbol} stock={stock} />
+                    <Suggestion clickOnSuggestion={(stock) => this.handleSuggestionClick(stock)} key={stock.symbol} stock={stock} />
                 )
             })
         )
+    }
+
+    handleSuggestionClick = (stock) => {
+        console.log(stock)
+        console.log(`${stock.name} clicked with ${stock.symbol} symbol.`)
     }
 
     render() {
