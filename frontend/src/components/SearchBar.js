@@ -37,7 +37,7 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-           <form onSubmit={this.handleSubmit}>
+           <form onSubmit={this.props.fetchSymbolData}>
                 <div className="row form-group">
                     <div className="col-8">
                         <input name="searchBarText" type="text" onChange={this.handleChange} className="form-control" value={this.state.searchBarText} />
