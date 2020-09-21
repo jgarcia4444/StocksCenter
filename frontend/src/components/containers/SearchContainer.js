@@ -40,21 +40,28 @@ export default class SearchContainer extends Component {
     }
 
     filterByQuery = (query) => {
-        let suggestions = this.state.stocksData.filter(stock => {
-            let stockNameLowercased = stock.name.toLowerCase()
-            if (stockNameLowercased.includes(query.toLowerCase())) {
-                return stock
-            }
-        })
-        console.log(query)
-        console.log(suggestions)
-        if (suggestions) {
+        if (query !== "") {
+           let suggestions = this.state.stocksData.filter(stock => {
+                let stockNameLowercased = stock.name.toLowerCase()
+                if (stockNameLowercased.includes(query.toLowerCase())) {
+                    return stock
+                }
+            })
+            if (suggestions) {
+                this.setState({
+                    ...this.state,
+                    suggestions: suggestions,
+                    searchQuery: query
+                })
+            } 
+        } else {
             this.setState({
                 ...this.state,
-                suggestions: suggestions,
-                searchQuery: query
+                suggestions: [],
+                searchQuery: ""
             })
         }
+        
     }
 
     render() {

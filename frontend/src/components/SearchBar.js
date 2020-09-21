@@ -5,7 +5,7 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-           <form autocomplete="off" onSubmit={this.props.fetchSearchData}>
+           <form autoComplete="off" onSubmit={this.props.fetchSearchData}>
                 <div className="row form-group">
                     <div className="col-8">
                         <input name="searchBarText" type="text" onChange={(e) => this.props.setSearchQuery(e)} className="form-control" />

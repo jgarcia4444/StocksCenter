@@ -27,7 +27,7 @@ export default class SuggestionsContainer extends Component {
         return (
             this.props.suggestions.map(stock => {
                 return (
-                    <Suggestion stock={stock} />
+                    <Suggestion key={stock.symbol} stock={stock} />
                 )
             })
         )
