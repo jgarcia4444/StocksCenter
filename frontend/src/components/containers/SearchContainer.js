@@ -42,7 +42,8 @@ export default class SearchContainer extends Component {
     setSelectedStock = (stock) => {
         this.setState({
             ...this.state,
-            selectedStock: stock
+            selectedStock: stock,
+            searchQuery: ""
         })
     }
 
@@ -74,8 +75,8 @@ export default class SearchContainer extends Component {
         return (
             <div className="container search-container">
                 <h3>Search Stocks</h3>
-                <SearchBar suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
-                <h4>{this.state.selectedStockSymbol ? `${this.state.selectedStockSymbol} Stock Info` : "Suggestions"}</h4>
+                <SearchBar searchValue={this.state.searchQuery} suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
+                <h4>{this.state.selectedStock ? `${this.state.selectedStock.symbol} Stock Info` : "Suggestions"}</h4>
                 <div className="suggestions-component">
                     {this.state.selectedStock !== null ? <StockDetailsContainer stock={this.state.selectedStock} /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
                 </div>
