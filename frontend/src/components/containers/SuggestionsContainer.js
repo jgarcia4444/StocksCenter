@@ -7,6 +7,8 @@ export default class SuggestionsContainer extends Component {
         super(props)
         this.state = {
             hasSuggestions: false,
+            BaseUrl: "http://api.marketstack.com/v1",
+            selectedStock: {}
         }
     }
     
@@ -34,8 +36,7 @@ export default class SuggestionsContainer extends Component {
     }
 
     handleClick = (stock) => {
-        console.log(stock)
-        console.log(`${stock.name} clicked with ${stock.symbol} symbol.`)
+        this.props.setSelectedStock(stock)
     }
 
     render() {

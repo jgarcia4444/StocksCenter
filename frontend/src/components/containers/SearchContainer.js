@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import SearchBar from '../SearchBar';
 import SuggestionsContainer from './SuggestionsContainer';
+import StockDetailsContainer from '../StockDetailsContainer';
 
 export default class SearchContainer extends Component {
 
-    let 
     fetchSearchStock = () => {
         let apiKey = process.env.REACT_APP_STOCKS_API_KEY
-        fetch(`${this.state.BaseUrl}/tickers?access_key=${apiKey}`)
+        fetch(`${this.state.baseUrl}/tickers?access_key=${apiKey}`)
             .then(res => res.json())
             .then(json => this.setState({
                 stocksData: json.data
@@ -17,11 +17,11 @@ export default class SearchContainer extends Component {
     constructor() {
         super()
         this.state = {
-            BaseUrl: "http://api.marketstack.com/v1",
+            baseUrl: "http://api.marketstack.com/v1",
             searchQuery: "",
             stocksData: [],
             suggestions: [],
-            selectedStockSymbol: ""
+            selectedStock: null
         }
         
     }
@@ -32,12 +32,18 @@ export default class SearchContainer extends Component {
 
     handleFormSubmitted = (e) => {
         e.preventDefault();
-        console.log(`${this.state.searchQuery}, sent from search container`)
     }
 
     handleInputChange = (e) => {
         let query = e.target.value
         this.filterByQuery(query)
+    }
+
+    setSelectedStock = (stock) => {
+        this.setState({
+            ...this.state,
+            selectedStock: stock
+        })
     }
 
     filterByQuery = (query) => {
@@ -71,7 +77,7 @@ export default class SearchContainer extends Component {
                 <SearchBar suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
                 <h4>{this.state.selectedStockSymbol ? `${this.state.selectedStockSymbol} Stock Info` : "Suggestions"}</h4>
                 <div className="suggestions-component">
-                    {this.state.selectedStockSymbol !== "" ? this.state.selectedStockSymbol : <SuggestionsContainer suggestions={this.state.suggestions} />}
+                    {this.state.selectedStock !== null ? <StockDetailsContainer stock={this.state.selectedStock} /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
                 </div>
             </div>
         )
