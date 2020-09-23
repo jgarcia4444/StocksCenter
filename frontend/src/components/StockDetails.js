@@ -11,6 +11,40 @@ const StockDetails = (props) => {
         date
     } = props.stockInfo
 
+    const formatNumArray = (arr) => {
+        var counter = 0
+        let formattedArray = arr.map((num, i) => {
+            if (counter === 2 && i !== arr.length - 1) {
+                counter = 0
+                if (arr.length % 3 === 0) {
+                    return num + ','
+                } else {
+                    return "," + num 
+                }
+            } else {
+                counter += 1
+                return num
+            }
+        })
+        return formattedArray;
+    }
+
+    const formattedVolume = () => {
+
+        let numString = volume.toString()
+        
+        if (numString.length % 3 === 0) {
+            let numArray = numString.split("")
+            let formattedArray = formatNumArray(numArray)
+            return formattedArray.join("")
+        } else {
+            console.log(numString)
+            let numArray = numString.split("").reverse()
+            let reverseNumArray = formatNumArray(numArray)
+            return reverseNumArray.reverse().join("")
+        }
+    }
+
     return (
         <div className="stock-details container">
             <div className="row">
@@ -21,7 +55,7 @@ const StockDetails = (props) => {
                                 <h6>Open</h6>
                             </div>
                             <div className="col-12">
-                                <p>{open}</p>
+                                <p>${open}</p>
                             </div>
                         </div>
                     </div>
@@ -33,7 +67,7 @@ const StockDetails = (props) => {
                                 <h6>Close</h6>
                             </div>
                             <div className="col-12">
-                                <p>{close}</p>
+                                <p>${close}</p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +81,7 @@ const StockDetails = (props) => {
                                 <h6>High</h6>
                             </div>
                             <div className="col-12">
-                                <p>{high}</p>
+                                <p>${high}</p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +93,7 @@ const StockDetails = (props) => {
                                 <h6>Low</h6>
                             </div>
                             <div className="col-12">
-                                <p>{low}</p>
+                                <p>${low}</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +107,7 @@ const StockDetails = (props) => {
                                 <h6>Volume</h6>
                             </div>
                             <div className="col-12">
-                                <p>{volume}</p>
+                                <p>{formattedVolume()}</p>
                             </div>
                         </div>
                     </div>
