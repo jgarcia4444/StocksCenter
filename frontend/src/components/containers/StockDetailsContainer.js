@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StockDetails from '../StockDetails';
 
 export default class StockDetailsContainer extends Component {
 
@@ -20,10 +21,20 @@ export default class StockDetailsContainer extends Component {
     }
 
     render() {
+        let {symbol, name} = this.props.stock
         return (
-            <div className="stock-details-container">
-                <h3>{this.props.stock.symbol}</h3>
-                <p>{this.props.stock.name}</p>
+            <div className="stock-details-container container">
+                <div className="row">
+                    <div className="col-4">
+                        <small>Ticker</small>
+                        <h5>{symbol}</h5>
+                    </div>
+                    <div className="col-8">
+                        <small>Company Name</small>
+                        <h5>{name}</h5>
+                    </div>
+                </div>
+                {this.state.stockInfo ? <StockDetails stockInfo={this.state.stockInfo[0]} /> : null}
             </div>
         )
     }
