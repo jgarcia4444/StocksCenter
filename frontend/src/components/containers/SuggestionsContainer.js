@@ -38,11 +38,11 @@ export default class SuggestionsContainer extends Component {
     handleClick = (stock) => {
         this.props.setSelectedStock(stock)
     }
-
+//
     render() {
         if (this.state.hasSuggestions) {
             return (
-                <div className="Suggestions-container">
+                <div className="suggestions-container">
                     {this.renderSuggestions()}
                 </div>
             )

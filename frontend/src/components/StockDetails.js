@@ -1,4 +1,5 @@
 import React from 'react';
+import './StockDetails.css'
 
 const StockDetails = (props) => {
 
@@ -38,7 +39,6 @@ const StockDetails = (props) => {
             let formattedArray = formatNumArray(numArray)
             return formattedArray.join("")
         } else {
-            console.log(numString)
             let numArray = numString.split("").reverse()
             let reverseNumArray = formatNumArray(numArray)
             return reverseNumArray.reverse().join("")

@@ -1,12 +1,21 @@
 .Home {
-    background-image: linear-gradient(to bottom right, #2d3436, #636e72, #2d3436);
+    background-image: linear-gradient(to bottom right, #0984e3, #74b9ff, #dfe6e9, #74b9ff, #0984e3);
     padding: 5%;  
     box-shadow: 10px 10px 10px 5px #333;
     /* border-radius: 10px; */
-    color: white;
+    color: black;
   }
   
   .home-title {
     text-align: center;
     font-weight: 300;
   }
+
+  .suggestions-component {
+    background-image: linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436); 
+    color: black;
+    padding: 5%;
+    box-shadow: inset 0 0 7px 2px black;
+    overflow: scroll;
+    height: 200px;
+}
