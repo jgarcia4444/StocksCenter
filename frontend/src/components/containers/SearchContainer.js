@@ -36,6 +36,12 @@ export default class SearchContainer extends Component {
 
     handleInputChange = (e) => {
         let query = e.target.value
+        if (this.state.selectedStock) {
+            this.setState({
+                ...this.state,
+                selectedStock: null
+            })
+        } 
         this.filterByQuery(query)
     }
 
@@ -55,20 +61,32 @@ export default class SearchContainer extends Component {
                     return stock
                 }
             })
-            if (suggestions) {
+            if (this.state.selectedStock) {
+                if (suggestions) {
+                    this.setState({
+                        ...this.state,
+                        selectedStock: null,
+                        suggestions: suggestions,
+                        searchQuery: query
+                    })
+                } else {
+                    console.log("No suggestions. after selected stock")
+                }
+            } else {
                 this.setState({
                     ...this.state,
                     suggestions: suggestions,
                     searchQuery: query
                 })
-            } 
+            }   
+            
         } else {
             this.setState({
                 ...this.state,
                 suggestions: [],
-                searchQuery: ""
+                searchQuery: "",
             })
-        }
+        } 
     }
 
     render() {
