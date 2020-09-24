@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SignupForm from './SignupForm';
 
 class SignupPageContainer extends Component {
+
+    state = {
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: ""
+    }
 
     render() {
 
         return (
             <div className="Home">
-                hello world signup
+                <SignupForm handleFormSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} />
             </div>
         )
 
