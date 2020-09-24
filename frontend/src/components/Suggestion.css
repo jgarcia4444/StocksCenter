@@ -8,6 +8,7 @@
     animation-duration: 0.5s;
     box-shadow: 5px 5px 5px 0 black;
     border: 2px solid white;
+    cursor: pointer;
 }
 
 @keyframes Suggested-Stocks-Hover {

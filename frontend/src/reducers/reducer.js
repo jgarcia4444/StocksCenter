@@ -1,5 +1,6 @@
 const defaultState = {
-    currentUser: {}
+    currentUser: {},
+    trackedStocks: []
 }
 
 export default function reducer(state = defaultState, action) {
@@ -10,6 +11,15 @@ export default function reducer(state = defaultState, action) {
                 currentUser: {
                     name: "Test"
                 }
+            }
+        case "TRACK_QUOTE":
+            console.log(action.type)
+            return {
+                currentUser: {
+                    id: 1,
+                    name: "Test"
+                },
+                trackedStocks: state.trackedStocks.concat(action.stock)
             }
         default:
             return state

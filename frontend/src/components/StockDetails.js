@@ -2,7 +2,7 @@ import React from 'react';
 import './StockDetails.css'
 
 const StockDetails = (props) => {
-
+    console.log(props)
     let {
         open, 
         close,
@@ -43,6 +43,13 @@ const StockDetails = (props) => {
             let reverseNumArray = formatNumArray(numArray)
             return reverseNumArray.reverse().join("")
         }
+    }
+
+    const formatDate = () => {
+        let newDate = new Date(date)
+        console.log(typeof newDate)
+        let formattedDate = newDate.toDateString()
+        return formattedDate
     }
 
     return (
@@ -119,7 +126,7 @@ const StockDetails = (props) => {
                                 <h6>Date</h6>
                             </div>
                             <div className="col-12">
-                                <p>{date}</p>
+                                <p>{formatDate()}</p>
                             </div>
                         </div>
                     </div>

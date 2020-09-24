@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import StockDetails from '../StockDetails';
+import trackQuote from '../actions/TrackQuote'
+import { connect } from 'react-redux';
 
-export default class StockDetailsContainer extends Component {
+class StockDetailsContainer extends Component {
 
     state = {
         stockInfo: null,
@@ -20,10 +22,21 @@ export default class StockDetailsContainer extends Component {
 
     }
 
+    handleTrackStockClick = () => {
+        // More to come
+        // Should send dispatch to redux store of the stock symbol and be stored into the logged in users tracked stocks
+        this.props.trackQuote(this.props.stock)
+    }
+
     render() {
         let {symbol, name} = this.props.stock
         return (
             <div className="stock-details-container container">
+                <div className="row">
+                    <div className="col-6">
+                        <button onClick={this.handleTrackStockClick} className="btn btn-primary">Track stock</button>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-4">
                         <small>Ticker</small>
@@ -39,3 +52,7 @@ export default class StockDetailsContainer extends Component {
         )
     }
 }
+
+export default connect(
+    null, { trackQuote }
+)(StockDetailsContainer)
