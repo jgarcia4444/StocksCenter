@@ -1,7 +1,7 @@
 import React from 'react';
-import Nav from './Nav';
+import Nav from '../nav/Nav';
 import './Home.css';
-import SearchContainer from './containers/SearchContainer'
+import SearchContainer from '../containers/SearchContainer'
 
 const Home = () => {
     return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StockDetails from '../StockDetails';
+import StockDetails from '../stockDetails/StockDetails';
 import trackQuote from '../actions/TrackQuote'
 import { connect } from 'react-redux';
 

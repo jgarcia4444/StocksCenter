@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Suggestion from '../Suggestion';
+import Suggestion from '../suggestion/Suggestion';
 
 export default class SuggestionsContainer extends Component {
     
