@@ -1,9 +1,13 @@
 class SessionController < ApplicationController
 
     def signup
-        User.create(user_params)
-        users = User.all
-        render :json => users
+        user = User.create(user_params)
+        if user.valid?
+            render :json => user
+        else
+            errors = user.errors
+            render :json => errors
+        end
     end
 
     def login 

@@ -9,7 +9,8 @@ class SignupPageContainer extends Component {
         lastName: "",
         password: "",
         email: "",
-        passwordNoteColor: "red"
+        passwordNoteColor: "red",
+        passwordValid: true
     }
 
     handleInputChange = (e) => {
@@ -23,20 +24,57 @@ class SignupPageContainer extends Component {
             this.setState({
                 ...this.state,
                 [e.target.name]: e.target.value,
-                passwordNoteColor: "red"
+                passwordNoteColor: "red",
+                passwordValid: true
             })
         }
     }
 
+    createUserFromState = () => {
+        let newUser = {
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            password: this.state.password,
+            email: this.state.email,
+        }
+        return newUser
+    }
+
+    attemptToSignup = () => {
+        if (this.state.password.length < 8) {
+            this.setState({
+                ...this.state,
+                passwordValid: false
+            })
+        } else {
+            let fetchUrl = "http://localhost:3000/signup"
+            let newUser = this.createUserFromState()
+            let body = JSON.stringify(newUser)
+            let options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: body
+            }
+            fetch(fetchUrl, options)
+                .then(res => res.json())
+                .then(json => console.log(json))
+        }
+        
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.value)
+        this.attemptToSignup()
     }
 
     render() {
 
         return (
             <div className="Home">
+            {this.state.passwordValid === false ? <p>Password must be {8 - this.state.password.length} character{this.state.password.length < 7 ? "s" : ""} longer </p> : null}
                 <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={(e) => this.handleSubmit(e)} handleInputChange={(e) => this.handleInputChange(e)} />
             </div>
         )
