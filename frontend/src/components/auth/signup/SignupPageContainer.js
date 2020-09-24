@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm';
+import signupUser from '../../actions/SignupUser';
 
 class SignupPageContainer extends Component {
 
@@ -10,7 +11,8 @@ class SignupPageContainer extends Component {
         password: "",
         email: "",
         passwordNoteColor: "red",
-        passwordValid: true
+        passwordValid: true,
+        redirect: null
     }
 
     handleInputChange = (e) => {
@@ -60,7 +62,13 @@ class SignupPageContainer extends Component {
             }
             fetch(fetchUrl, options)
                 .then(res => res.json())
-                .then(json => console.log(json))
+                .then(json => {
+                    if (json.id) {
+                        this.props.signupUser(json)
+                    } else {
+                        //
+                    }
+                })
         }
         
     }
@@ -84,5 +92,6 @@ class SignupPageContainer extends Component {
 }
 
 export default connect(
-
+    null,
+    { signupUser }
 )(SignupPageContainer);
