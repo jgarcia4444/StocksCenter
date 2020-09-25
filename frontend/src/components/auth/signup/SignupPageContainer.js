@@ -66,7 +66,7 @@ class SignupPageContainer extends Component {
                     if (json.id) {
                         this.props.signupUser(json)
                     } else {
-                        //
+                        // error handling to come.
                     }
                 })
         }

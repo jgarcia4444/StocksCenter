@@ -15,11 +15,20 @@ export default function reducer(state = defaultState, action) {
         case "TRACK_QUOTE":
             console.log(action.type)
             return {
-                currentUser: {
-                    id: 1,
-                    name: "Test"
-                },
+                ...state.currentUser,
                 trackedStocks: state.trackedStocks.concat(action.stock)
+            }
+        case "USER_SIGNUP":
+            console.log(action.type)
+            return {
+                ...state.trackedStocks,
+                currentUser: action.user
+            }
+        case "GET_USER":
+            console.log(action.currentUser)
+            return {
+                ...state.trackedStocks,
+                currentUser: action.currentUser
             }
         default:
             return state
