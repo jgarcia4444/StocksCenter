@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm';
 import signupUser from '../../actions/SignupUser';
+import { Redirect } from 'react-router-dom';
 
 class SignupPageContainer extends Component {
 
@@ -67,6 +68,10 @@ class SignupPageContainer extends Component {
                     if (json.id) {
                         console.log(json)
                         this.props.signupUser(json)
+                        this.setState({
+                            ...this.state,
+                            redirect: '/'
+                        })
                     } else {
                         console.log(json)
                         this.setState({
@@ -86,13 +91,19 @@ class SignupPageContainer extends Component {
 
     render() {
 
-        return (
-            <div className="Home">
-            {this.state.errorMessages ? <p>Email { this.state.errorMessages.email[0] }</p> : null}
-            {this.state.passwordValid === false ? <p>Password must be {8 - this.state.password.length} character{this.state.password.length < 7 ? "s" : ""} longer </p> : null}
-                <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={(e) => this.handleSubmit(e)} handleInputChange={(e) => this.handleInputChange(e)} />
-            </div>
-        )
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        } else {
+           return (
+                <div className="Home">
+                    {this.state.errorMessages ? <p>Email { this.state.errorMessages.email[0] }</p> : null}
+                    {this.state.passwordValid === false ? <p>Password must be {8 - this.state.password.length} character{this.state.password.length < 7 ? "s" : ""} longer </p> : null}
+                    <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={(e) => this.handleSubmit(e)} handleInputChange={(e) => this.handleInputChange(e)} />
+                </div>
+            ) 
+        }
+
+        
 
     }
     

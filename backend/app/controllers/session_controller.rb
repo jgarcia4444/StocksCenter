@@ -1,9 +1,10 @@
 class SessionController < ApplicationController
 
     def get_user
+        puts "There should be a session user id here: #{session[:user_id]}"
         if session[:user_id]
             user = User.find(session[:user_id])
-            render :json => user, include: [:id, :first_name, :last_name]
+            render :json => user
         else
             render :json => {message: "No current user"}
         end
@@ -13,6 +14,7 @@ class SessionController < ApplicationController
         user = User.create(user_params)
         if user.valid?
             session[:user_id] = user.id
+            puts "This is the session id: #{session[:user_id]}"
             render :json => user
         else
             errors = user.errors

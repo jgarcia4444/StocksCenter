@@ -22,7 +22,14 @@ class App extends Component {
   fetchUser = () => {
     fetch("http://localhost:3000/get-user")
       .then(res => res.json())
-      .then(json => this.props.updateCurrentUser(json))
+      .then(json => {
+        if (json.id) {
+          console.log(json)
+          this.props.updateCurrentUser(json)
+        } else {
+          console.log(json)
+        }
+      })
   }
   
   render() {
