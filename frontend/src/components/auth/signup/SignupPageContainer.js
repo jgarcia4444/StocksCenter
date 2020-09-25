@@ -13,6 +13,7 @@ class SignupPageContainer extends Component {
         passwordNoteColor: "red",
         passwordValid: true,
         redirect: null,
+        errorMessages: null
     }
 
     handleInputChange = (e) => {
@@ -64,9 +65,14 @@ class SignupPageContainer extends Component {
                 .then(res => res.json())
                 .then(json => {
                     if (json.id) {
+                        console.log(json)
                         this.props.signupUser(json)
                     } else {
-                        // error handling to come.
+                        console.log(json)
+                        this.setState({
+                            ...this.state,
+                            errorMessages: json
+                        })
                     }
                 })
         }
@@ -82,6 +88,7 @@ class SignupPageContainer extends Component {
 
         return (
             <div className="Home">
+            {this.state.errorMessages ? <p>Email { this.state.errorMessages.email[0] }</p> : null}
             {this.state.passwordValid === false ? <p>Password must be {8 - this.state.password.length} character{this.state.password.length < 7 ? "s" : ""} longer </p> : null}
                 <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={(e) => this.handleSubmit(e)} handleInputChange={(e) => this.handleInputChange(e)} />
             </div>
