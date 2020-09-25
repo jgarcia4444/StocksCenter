@@ -6,13 +6,24 @@ import {
   Switch,
   Route
  } from 'react-router-dom';
+ import updateCurrentUser from './components/actions/UpdateCurrentUser';
 
  import LoginPageContainer from './components/auth/login/LoginPageContainer';
  import SignupPageContainer from './components/auth/signup/SignupPageContainer';
+import { connect } from 'react-redux';
 
 class App extends Component {
 
-  
+  constructor() {
+    super()
+    this.fetchUser()
+  }
+
+  fetchUser = () => {
+    fetch("http://localhost:3000/get-user")
+      .then(res => res.json())
+      .then(json => this.props.updateCurrentUser(json))
+  }
   
   render() {
     return (
@@ -36,4 +47,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { updateCurrentUser }
+)(App);

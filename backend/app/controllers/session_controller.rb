@@ -1,5 +1,14 @@
 class SessionController < ApplicationController
 
+    def get_user
+        if session[:user_id]
+            user = User.find(session[:user_id])
+            render :json => user, include: [:id, :first_name, :last_name]
+        else
+            render :json => {message: "No current user"}
+        end
+    end
+
     def signup
         user = User.create(user_params)
         if user.valid?
