@@ -12,7 +12,7 @@ class SignupPageContainer extends Component {
         email: "",
         passwordNoteColor: "red",
         passwordValid: true,
-        redirect: null
+        redirect: null,
     }
 
     handleInputChange = (e) => {
