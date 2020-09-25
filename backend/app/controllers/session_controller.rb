@@ -3,6 +3,7 @@ class SessionController < ApplicationController
     def signup
         user = User.create(user_params)
         if user.valid?
+            session[:user_id] = user.id
             render :json => user
         else
             errors = user.errors
