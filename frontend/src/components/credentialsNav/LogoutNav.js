@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const LogoutNav = () => {
+const LogoutNav = (props) => {
     return (
        <ul className="nav justify-content-end">
             <li className="nav-item">
-                <Link to="/logout" className="nav-link">Logout</Link>
+                <button onClick={props.handleLogoutClick} className="nav-link">Logout</button>
             </li>
         </ul> 
     )

@@ -2,7 +2,6 @@ import React from 'react';
 import './StockDetails.css'
 
 const StockDetails = (props) => {
-    console.log(props)
     let {
         open, 
         close,
@@ -47,7 +46,6 @@ const StockDetails = (props) => {
 
     const formatDate = () => {
         let newDate = new Date(date)
-        console.log(typeof newDate)
         let formattedDate = newDate.toDateString()
         return formattedDate
     }

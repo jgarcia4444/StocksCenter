@@ -30,6 +30,12 @@ export default function reducer(state = defaultState, action) {
                 ...state.trackedStocks,
                 currentUser: action.currentUser
             }
+            case "LOGOUT_USER":
+                localStorage.removeItem("userId");
+                return {
+                    ...state.trackedStocks,
+                    currentUser: {}
+                }
         default:
             return state
     }

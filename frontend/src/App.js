@@ -16,19 +16,26 @@ class App extends Component {
 
   constructor() {
     super()
+  }
+
+  componentDidUpdate() {
     this.fetchUser()
   }
 
   fetchUser = () => {
-    fetch(`http://localhost:3000/users/${localStorage.getItem("userId")}`)
-      .then(res => res.json())
-      .then(json => {
-        if (json.user) {
-          this.props.updateCurrentUser(json)
-        } else {
-          console.log(json)
-        }
-      })
+    if (localStorage.getItem("userID") !== null) {
+
+      fetch(`http://localhost:3000/users/${localStorage.getItem("userId")}`)
+        .then(res => res.json())
+        .then(json => {
+          if (json.user) {
+            this.props.updateCurrentUser(json)
+          } else {
+            console.log(json)
+          }
+        })
+    }
+    
   }
   
   render() {
