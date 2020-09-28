@@ -1,1 +1,1 @@
-Rails.application.config.session_store :cookie_store, key: 'StocksCenter'
+Rails.application.config.session_store :session_store , key: 'StocksCenter'

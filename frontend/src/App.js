@@ -20,11 +20,10 @@ class App extends Component {
   }
 
   fetchUser = () => {
-    fetch("http://localhost:3000/get-user")
+    fetch(`http://localhost:3000/users/${localStorage.getItem("userId")}`)
       .then(res => res.json())
       .then(json => {
-        if (json.id) {
-          console.log(json)
+        if (json.user) {
           this.props.updateCurrentUser(json)
         } else {
           console.log(json)

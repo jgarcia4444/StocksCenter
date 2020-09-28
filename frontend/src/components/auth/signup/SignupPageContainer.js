@@ -68,6 +68,7 @@ class SignupPageContainer extends Component {
                     if (json.id) {
                         console.log(json)
                         this.props.signupUser(json)
+                        localStorage.setItem("userId", json.id)
                         this.setState({
                             ...this.state,
                             redirect: '/'
