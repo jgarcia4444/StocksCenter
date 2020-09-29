@@ -1,9 +1,11 @@
 import React from 'react';
+import Nav from '../../nav/Nav'
 
 const SignupForm = (props) => {
 
     return (
         <div className="signup-form container">
+            <Nav />
             <div className="row">
                 <div className="col-12">
                   <h2>Signup Form</h2>  

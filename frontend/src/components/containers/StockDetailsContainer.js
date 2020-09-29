@@ -8,7 +8,8 @@ class StockDetailsContainer extends Component {
     state = {
         stockInfo: null,
         BaseUrl: "http://api.marketstack.com/v1",
-        showTrackedAlert: false
+        showTrackedAlert: false,
+        trackingMessage: "is now saved in your tracked stocks."
     }
 
     componentDidMount() {
@@ -26,7 +27,7 @@ class StockDetailsContainer extends Component {
     handleTrackStockClick = () => {
         let { stock } = this.props
         let { id } = this.props.currentUser
-        this.props.trackQuote(this.props.stock)
+        
         const jsonUserStock = JSON.stringify({
             user_id: id,
             stock_symbol: stock.symbol
@@ -42,6 +43,15 @@ class StockDetailsContainer extends Component {
         fetch(`http://localhost:3000/users/${id}/user_stocks`, options)
         .then(res => res.json())
         .then(data => {
+            if (data.userStocks) {
+                this.props.trackQuote(this.props.stock)
+            } else {
+                this.setState({
+                    ...this.state,
+                    trackingMessage: data.message,
+                    showTrackedAlert: true
+                })
+            }
             
         })
     }
@@ -51,8 +61,8 @@ class StockDetailsContainer extends Component {
         return (
             <div className="stock-details-container container">
                 <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className="alert alert-primary alert-dismissible fade show">
-                    {name} is now saved in your tracked stocks.
-                    <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    {name} {this.state.trackingMessage}
+                    <button  type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

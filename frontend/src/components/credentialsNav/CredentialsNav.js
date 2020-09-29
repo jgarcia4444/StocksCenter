@@ -7,36 +7,15 @@ import LogoutNav from './LogoutNav';
 import logUserOut from '../actions/LogUserOut';
 
 class CredentialsNav extends Component {
-
-    state = {
-        hasLoggedInUser: false
-    }
-
-    componentDidMount() {
-        if (Object.keys(this.props.user).length > 0) {
-            this.setState({
-                hasLoggedInUser: true
-            })
-        } else {
-            this.setState({
-                hasLoggedInUser: false
-            })
-        }
-    }
-
+    
     logoutClicked = () => {
-        console.log(this.props.logUserOut())
-        this.setState({
-            hasLoggedInUser: false
-        })
         this.props.logUserOut()
     }
 
     render() {
-
         return (
             <div className="credentials-nav-signup-login">
-                {this.state.hasLoggedInUser == true ? <LogoutNav handleLogoutClick={this.logoutClicked} /> : <SignupLoginNav /> }
+                {Object.keys(this.props.user).length > 0 ? <LogoutNav handleLogoutClick={this.logoutClicked} /> : <SignupLoginNav /> }
             </div>
         )
     }

@@ -15,17 +15,17 @@ class SessionController < ApplicationController
     def login 
         puts 'logged in !!!!!!!!'
         puts "These are the params: #{params}"
-        user_email = params[:email]
+        user_email = params[:login_data][:email]
         potential_user = User.find_by(:email => user_email)
         if potential_user
-            pass = params[:password]
+            pass = params[:login_data][:password]
             if potential_user.authenticate(pass)
                 render :json => potential_user
             else
-                render :json => {message: "Incorrect password."}
+                render :json => {key: "PASS", message: "Incorrect password."}
             end
         else
-            render :json => {message: "No user found with this email."}
+            render :json => {key: 'EMAIL',message: "No user found with this email."}
         end
     end
 

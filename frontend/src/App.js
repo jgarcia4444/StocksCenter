@@ -18,13 +18,17 @@ class App extends Component {
     super()
   }
 
-  componentDidUpdate() {
-    this.fetchUser()
+  componentDidMount() {
+    window.onload = () => {
+      this.fetchUser()
+    }
   }
 
   fetchUser = () => {
-    if (localStorage.getItem("userID") !== null) {
-
+    console.log("HELLLLOOOOO!!!!!")
+    const userId = localStorage.getItem('userId');
+    if (userId !== null) {
+      console.log(userId)
       fetch(`http://localhost:3000/users/${localStorage.getItem("userId")}`)
         .then(res => res.json())
         .then(json => {
@@ -34,6 +38,8 @@ class App extends Component {
             console.log(json)
           }
         })
+    } else {
+      console.log(userId)
     }
     
   }

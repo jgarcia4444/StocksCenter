@@ -1,9 +1,16 @@
 class UserStocksController < ApplicationController 
 
     def create
-        UserStock.create(user_stocks_params)
-        user_stocks = UserStock.all
-        render :json => user_stocks
+        possible_duplicate = UserStock.find_by(user_stocks_params)
+        if possible_duplicate
+            render :json => {:message => "This stock is already being tracked."}
+        else
+            UserStock.create(user_stocks_params)
+            user = User.find(params[:user_id])
+            user_stocks = user.user_stocks
+            render :json => {userStocks: user_stocks}
+        end
+        
     end
 
     def destroy
