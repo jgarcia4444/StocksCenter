@@ -5,7 +5,7 @@ const StockTile = (props) => {
     return (
         <div className="stock-tile">
             <h4>
-                {stock.symbol}
+                {stock.stock_symbol}
             </h4>
         </div>
     )
