@@ -3,7 +3,7 @@ class UserStocksController < ApplicationController
     def create
         possible_duplicate = UserStock.find_by(user_stocks_params)
         if possible_duplicate
-            render :json => {:message => "This stock is already being tracked."}
+            render :json => {:message => "is already being tracked."}
         else
             UserStock.create(user_stocks_params)
             user = User.find(params[:user_id])

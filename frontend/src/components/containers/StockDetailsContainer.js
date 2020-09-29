@@ -9,7 +9,8 @@ class StockDetailsContainer extends Component {
         stockInfo: null,
         BaseUrl: "http://api.marketstack.com/v1",
         showTrackedAlert: false,
-        trackingMessage: "is now saved in your tracked stocks."
+        trackingMessage: "is now saved in your tracked stocks.",
+        duplicate: false
     }
 
     componentDidMount() {
@@ -45,14 +46,29 @@ class StockDetailsContainer extends Component {
         .then(data => {
             if (data.userStocks) {
                 this.props.trackQuote(this.props.stock)
+                this.setState({
+                    ...this.state,
+                    showTrackedAlert: true,
+                    duplicate: false,
+                    trackingMessage: "is now saved in your tracked stocks."
+                })
             } else {
                 this.setState({
                     ...this.state,
                     trackingMessage: data.message,
-                    showTrackedAlert: true
+                    showTrackedAlert: true,
+                    duplicate: true
                 })
             }
             
+        })
+    }
+
+    dismissAlert = () => {
+        this.setState({
+            showTrackedAlert: false,
+            duplicate: false,
+            trackingMessage: "is now saved in your tracked stocks."
         })
     }
 
@@ -60,9 +76,9 @@ class StockDetailsContainer extends Component {
         let {symbol, name} = this.props.stock
         return (
             <div className="stock-details-container container">
-                <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className="alert alert-primary alert-dismissible fade show">
+                <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className={this.state.duplicate ? "alert alert-danger alert-dismissible fade show" : "alert alert-primary alert-dismissible fade show"}>
                     {name} {this.state.trackingMessage}
-                    <button  type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    <button onClick={this.dismissAlert} type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
