@@ -9,7 +9,7 @@ const StockRow = (props) => {
             {stocks.map(stock => {
                 return (
                     <div key={`${stock.user_id}${stock.id}`} className="col-4">
-                        <StockTile stock={stock} />
+                        <StockTile handleTrackedClick={props.handleTrackedClick} stock={stock} />
                     </div>
                 )
             })}
