@@ -1,4 +1,5 @@
 import React from 'react';
+import './StockTile.css';
 
 const StockTile = (props) => {
     let { stock } = props

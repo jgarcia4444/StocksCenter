@@ -32,10 +32,11 @@ class LoginPageContainer extends Component {
         fetch(this.state.fetchUrl, options)
             .then(res => res.json())
             .then(data => {
-                if (!data.id) {
+                if (!data.user) {
                     this.outPutErrorMessage(data)
                 } else {
-                    localStorage.setItem("userId", data.id)
+                    console.log(data)
+                    localStorage.setItem("userId", data.user.id)
                     this.props.signupUser(data)
                     this.setState({
                         ...this.state,

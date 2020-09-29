@@ -20,7 +20,8 @@ class SessionController < ApplicationController
         if potential_user
             pass = params[:login_data][:password]
             if potential_user.authenticate(pass)
-                render :json => potential_user
+                user_stocks = potential_user.user_stocks
+                render :json => {user: potential_user, user_stocks: user_stocks}
             else
                 render :json => {key: "PASS", message: "Incorrect password."}
             end

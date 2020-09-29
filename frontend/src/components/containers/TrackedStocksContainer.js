@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StockRow from '../trackedStocks/StockRow';
 import StockTile from '../trackedStocks/StockTile';
-
+import './TrackedStocksContainer.css'
 class TrackedStocksContainer extends Component {
 
 
@@ -18,12 +18,14 @@ class TrackedStocksContainer extends Component {
     }
 
     render() {
-        // let userObjectLength = Object.keys(this.props.currentUser).length
         return (
-            <div className="tracked-stocks-container container">
-                <h4>Tracked Stocks</h4>
-                {this.renderStocks()}
+            <div>
+               <h4 id="tracked-stocks-title">Tracked Stocks</h4>
+                <div className="tracked-stocks-container">
+                    {this.props.trackedStocks.length > 0 ? this.renderStocks() : <p>No stocks tracked yet.</p> }
+                </div> 
             </div>
+            
         )   
     }
 
