@@ -8,6 +8,7 @@ class StockDetailsContainer extends Component {
     state = {
         stockInfo: null,
         BaseUrl: "http://api.marketstack.com/v1",
+        showTrackedAlert: false
     }
 
     componentDidMount() {
@@ -23,15 +24,38 @@ class StockDetailsContainer extends Component {
     }
 
     handleTrackStockClick = () => {
-        // More to come
-        // Should send dispatch to redux store of the stock symbol and be stored into the logged in users tracked stocks
+        let { stock } = this.props
+        let { id } = this.props.currentUser
         this.props.trackQuote(this.props.stock)
+        const jsonUserStock = JSON.stringify({
+            user_id: id,
+            stock_symbol: stock.symbol
+        })
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: jsonUserStock
+        }
+        fetch(`http://localhost:3000/users/${id}/user_stocks`, options)
+        .then(res => res.json())
+        .then(data => {
+            
+        })
     }
 
     render() {
         let {symbol, name} = this.props.stock
         return (
             <div className="stock-details-container container">
+                <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className="alert alert-primary alert-dismissible fade show">
+                    {name} is now saved in your tracked stocks.
+                    <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div className="row">
                     <div className="col-6">
                         <button onClick={this.handleTrackStockClick} className="btn btn-primary">Track stock</button>
@@ -53,6 +77,13 @@ class StockDetailsContainer extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        currentUser: state.currentUser
+    }
+}
+
 export default connect(
-    null, { trackQuote }
+    mapStateToProps, 
+    { trackQuote }
 )(StockDetailsContainer)

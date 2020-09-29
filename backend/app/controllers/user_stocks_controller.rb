@@ -1,11 +1,9 @@
 class UserStocksController < ApplicationController 
 
     def create
-        
-        UserStock.create(user_id: params[:user_id], stock_symbol: params[:user_stock][:stock_symbol])
+        UserStock.create(user_stocks_params)
         user_stocks = UserStock.all
         render :json => user_stocks
-
     end
 
     def destroy
@@ -20,5 +18,10 @@ class UserStocksController < ApplicationController
         end
 
     end
+
+    private 
+        def user_stocks_params
+            params.permit(:user_id, :stock_symbol)
+        end
 
 end

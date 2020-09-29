@@ -8,5 +8,6 @@ const trackQuote = (stock) => {
         }
     }
 }
+//
 
 export default trackQuote
