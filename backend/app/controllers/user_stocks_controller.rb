@@ -1,15 +1,26 @@
 class UserStocksController < ApplicationController 
 
     def create
-        possible_duplicate = UserStock.find_by(user_stocks_params)
-        if possible_duplicate
-            render :json => {:message => "is already being tracked."}
+        if !params[:user_id]
+            render :json => {message: "You must be have an account and be signed in to track a stock."}
         else
-            UserStock.create(user_stocks_params)
-            user = User.find(params[:user_id])
-            user_stocks = user.user_stocks
-            render :json => {userStocks: user_stocks}
+            possible_duplicate = UserStock.find_by(user_stocks_params)
+            if possible_duplicate
+                render :json => {:message => "is already being tracked."}
+            else
+                user_stock = UserStock.create(user_stocks_params)
+                if user_stock
+                    user = User.find(params[:user_id])
+                    user_stocks = user.user_stocks
+                    render :json => {userStocks: user_stocks}
+                else 
+                render :json => {message: "Unable to save to tracked stocks."} 
+                end
+            end
+            
         end
+        
+        
         
     end
 

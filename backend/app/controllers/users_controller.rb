@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
     def show
-        puts 'This a test from users show action' 
         user_id = params[:id]    
         user = User.find(user_id)
         if user

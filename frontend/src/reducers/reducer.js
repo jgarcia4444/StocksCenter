@@ -17,9 +17,8 @@ export default function reducer(state = defaultState, action) {
                 currentUser: action.user
             }
         case "GET_USER":
-            console.log(action.currentUser)
             return {
-                trackedStocks: state.trackedStocks,
+                trackedStocks: action.trackedStocks,
                 currentUser: action.currentUser
             }
             case "LOGOUT_USER":

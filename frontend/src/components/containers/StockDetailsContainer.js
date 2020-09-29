@@ -10,7 +10,8 @@ class StockDetailsContainer extends Component {
         BaseUrl: "http://api.marketstack.com/v1",
         showTrackedAlert: false,
         trackingMessage: "is now saved in your tracked stocks.",
-        duplicate: false
+        duplicate: false,
+        notSignedIn: false
     }
 
     componentDidMount() {
@@ -41,27 +42,35 @@ class StockDetailsContainer extends Component {
             },
             body: jsonUserStock
         }
-        fetch(`http://localhost:3000/users/${id}/user_stocks`, options)
-        .then(res => res.json())
-        .then(data => {
-            if (data.userStocks) {
-                this.props.trackQuote(this.props.stock)
-                this.setState({
-                    ...this.state,
-                    showTrackedAlert: true,
-                    duplicate: false,
-                    trackingMessage: "is now saved in your tracked stocks."
-                })
-            } else {
-                this.setState({
-                    ...this.state,
-                    trackingMessage: data.message,
-                    showTrackedAlert: true,
-                    duplicate: true
-                })
-            }
-            
-        })
+        if (id) {
+            fetch(`http://localhost:3000/users/${id}/user_stocks`, options)
+            .then(res => res.json())
+            .then(data => {
+                if (data.userStocks) {
+                    this.props.trackQuote(this.props.stock)
+                    this.setState({
+                        ...this.state,
+                        showTrackedAlert: true,
+                        duplicate: false,
+                        trackingMessage: "is now saved in your tracked stocks."
+                    })
+                } else {
+                    this.setState({
+                        ...this.state,
+                        trackingMessage: data.message,
+                        showTrackedAlert: true,
+                        duplicate: true,
+                    })  
+                }
+            })
+        } else {
+            this.setState({
+                ...this.state,
+                trackingMessage: "You must have an account and be signed in to track stocks.",
+                showTrackedAlert: true,
+                notSignedIn: true
+            })
+        }
     }
 
     dismissAlert = () => {
@@ -77,7 +86,7 @@ class StockDetailsContainer extends Component {
         return (
             <div className="stock-details-container container">
                 <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className={this.state.duplicate ? "alert alert-danger alert-dismissible fade show" : "alert alert-primary alert-dismissible fade show"}>
-                    {name} {this.state.trackingMessage}
+                    {this.state.notSignedIn ? "" : name} {this.state.trackingMessage}
                     <button onClick={this.dismissAlert} type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
