@@ -36,7 +36,7 @@ class CredentialsNav extends Component {
 
         return (
             <div className="credentials-nav-signup-login">
-                {this.state.hasLoggedInUser == true ? <LogoutNav handleLogoutClick={this.props.logoutClicked} /> : <SignupLoginNav /> }
+                {this.state.hasLoggedInUser == true ? <LogoutNav handleLogoutClick={this.logoutClicked} /> : <SignupLoginNav /> }
             </div>
         )
     }
