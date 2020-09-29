@@ -8,6 +8,7 @@ const LoginForm = (props) => {
     return (
         <div className="login-form container">
             <Nav />
+            {props.errorMessage ? <p style={{color: 'red'}}>{props.errorMessage}</p> : null}
             <form onSubmit={props.handleLoginSubmit}>
                 <div className="row">
                     <div className="col-12">

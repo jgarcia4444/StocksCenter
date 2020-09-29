@@ -40,14 +40,18 @@ class LoginPageContainer extends Component {
                     this.props.signupUser(data)
                     this.setState({
                         ...this.state,
-                        redirect: '/'
+                        redirect: '/',
+                        errorMessage: null
                     })
                 }
             })
     }
 
     outPutErrorMessage = (data) => {
-
+        this.setState({
+            ...this.state,
+            errorMessage: data.message
+        })
     }
 
     handleInputChange = (e) => {
@@ -63,7 +67,7 @@ class LoginPageContainer extends Component {
         } else {
             return (
                     <div className="Home">
-                        <LoginForm email={this.state.email} password={this.state.password} handleLoginSubmit={this.handleLoginSubmit} handleInputChange={this.handleInputChange}/>
+                        <LoginForm errorMessage={this.state.errorMessage} email={this.state.email} password={this.state.password} handleLoginSubmit={this.handleLoginSubmit} handleInputChange={this.handleInputChange}/>
                     </div>
                 )  
         }
