@@ -25,7 +25,6 @@ class UserStocksController < ApplicationController
     end
 
     def destroy
-
         user_id = params[:user_stock][:user_id]
         stock_symbol = params[:user_stock][:stock_symbol]
         user_stock_for_deletion = UserStock.find_by(:user_id => user_id, :stock_symbol => stock_symbol)

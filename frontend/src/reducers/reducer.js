@@ -22,12 +22,18 @@ export default function reducer(state = defaultState, action) {
                 trackedStocks: action.trackedStocks,
                 currentUser: action.currentUser
             }
-            case "LOGOUT_USER":
-                localStorage.removeItem("userId");
-                return {
-                    trackedStocks: [],
-                    currentUser: {}
-                }
+        case "LOGOUT_USER":
+            localStorage.removeItem("userId");
+            return {
+                trackedStocks: [],
+                currentUser: {}
+            }
+        case 'DELETE_STOCK':
+            return {
+                currentUser: state.currentUser,
+                trackedStocks: state.trackedStocks.filter(stock => stock.stock_symbol !== action.stock_symbol)
+            }
+            
         default:
             return state
     }
