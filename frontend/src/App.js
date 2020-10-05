@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   fetchUser = () => {
-    console.log("HELLLLOOOOO!!!!!")
     const userId = localStorage.getItem('userId');
     if (userId !== null) {
       console.log(userId)

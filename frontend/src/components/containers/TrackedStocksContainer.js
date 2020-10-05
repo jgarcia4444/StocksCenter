@@ -84,7 +84,7 @@ class TrackedStocksContainer extends Component {
     }
 
     render() {
-        if ((this.props.trackedStocks.length > 0) && (!this.state.stockInfo)) {
+        if ((this.props.trackedStocks !== undefined) && (!this.state.stockInfo)) {
             return (
                     <div>
                         <h4 id="tracked-stocks-title">Tracked Stocks</h4>

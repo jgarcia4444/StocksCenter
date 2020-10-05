@@ -3,9 +3,11 @@ class SessionController < ApplicationController
     def signup
         user = User.create(user_params)
         if user.valid?
-            session[:user_id] = user.id
-            puts "This is the session id: #{session[:user_id]}"
-            render :json => user
+            user_stocks = user.user_stocks
+            if user_stocks.count < 1
+                user_stocks = []
+            end
+            render :json => {user: user, user_stocks: user_stocks}
         else
             errors = user.errors
             render :json => errors

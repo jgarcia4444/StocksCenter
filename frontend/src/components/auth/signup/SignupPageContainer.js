@@ -65,9 +65,10 @@ class SignupPageContainer extends Component {
             fetch(fetchUrl, options)
                 .then(res => res.json())
                 .then(json => {
-                    if (json.id) {
-                        this.props.signupUser(json)
-                        localStorage.setItem("userId", json.id)
+                    if (json.user.id) {
+                        const { user, user_stocks } = json
+                        this.props.signupUser({user, user_stocks})
+                        localStorage.setItem("userId", user.id)
                         this.setState({
                             ...this.state,
                             redirect: '/'
