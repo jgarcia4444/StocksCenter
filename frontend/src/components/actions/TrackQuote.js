@@ -3,7 +3,7 @@ const trackQuote = (stock) => {
     return {
         type: "TRACK_QUOTE",
         stock: {
-            symbol: stock.symbol,
+            stock_symbol: stock.symbol,
             name: stock.name
         }
     }
