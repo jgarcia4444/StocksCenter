@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StockDetails from '../stockDetails/StockDetails';
-import trackQuote from '../actions/TrackQuote'
+import trackStock from '../actions/TrackStock'
 import { connect } from 'react-redux';
 
 class StockDetailsContainer extends Component {
@@ -47,7 +47,7 @@ class StockDetailsContainer extends Component {
             .then(res => res.json())
             .then(data => {
                 if (data.userStocks) {
-                    this.props.trackQuote(this.props.stock)
+                    this.props.trackStock(this.props.stock)
                     this.setState({
                         ...this.state,
                         showTrackedAlert: true,
@@ -120,5 +120,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps, 
-    { trackQuote }
+    { trackStock }
 )(StockDetailsContainer)

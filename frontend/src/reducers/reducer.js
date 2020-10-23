@@ -5,11 +5,16 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
     switch(action.type) {
-        case "TRACK_QUOTE":
-            console.log(action.type)
+        case "TRACK_STOCK":
+            var stocks;
+            if (state.trackedStocks) {
+                stocks = state.trackedStocks
+            } else {
+                stocks = []
+            }
             return {
                 currentUser: state.currentUser,
-                trackedStocks: state.trackedStocks.concat(action.stock)
+                trackedStocks: stocks.concat(action.stock)
             }
         case "USER_SIGNUP":
             return {
@@ -18,8 +23,14 @@ export default function reducer(state = defaultState, action) {
             }
         case "GET_USER":
             console.log(action)
+            var stocks;
+            if (action.trackedStocks.length > 0) {
+                stocks = action.trackedStocks
+            } else {
+                stocks = []
+            }
             return {
-                trackedStocks: action.trackedStocks,
+                trackedStocks: stocks,
                 currentUser: action.currentUser
             }
         case "LOGOUT_USER":
