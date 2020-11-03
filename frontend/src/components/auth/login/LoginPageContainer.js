@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from './LoginForm';
-import signupUser from '../../actions/SignupUser';
+import signupUser from '../../../actions/SignupUser';
 import { Redirect } from 'react-router-dom'
 
 class LoginPageContainer extends Component {

@@ -6,7 +6,7 @@ import {
   Switch,
   Route
  } from 'react-router-dom';
- import updateCurrentUser from './components/actions/UpdateCurrentUser';
+ import updateCurrentUser from './actions/UpdateCurrentUser';
 
  import LoginPageContainer from './components/auth/login/LoginPageContainer';
  import SignupPageContainer from './components/auth/signup/SignupPageContainer';

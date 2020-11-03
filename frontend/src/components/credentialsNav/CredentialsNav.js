@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignupLoginNav from './SignupLoginNav';
 import LogoutNav from './LogoutNav';
 
-import logUserOut from '../actions/LogUserOut';
+import logUserOut from '../../actions/LogUserOut';
 
 class CredentialsNav extends Component {
     

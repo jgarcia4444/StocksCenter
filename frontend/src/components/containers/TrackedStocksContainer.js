@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import StockRow from '../trackedStocks/StockRow';
 import './TrackedStocksContainer.css'
 import StockDetails from '../stockDetails/StockDetails';
-import deleteTrackedStock from '../actions/DeleteTrackedStock';
+import deleteTrackedStock from '../../actions/DeleteTrackedStock';
 
 class TrackedStocksContainer extends Component {
 

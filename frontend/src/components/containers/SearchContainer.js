@@ -56,6 +56,7 @@ export default class SearchContainer extends Component {
     filterByQuery = (query) => {
         if (query !== "") {
            let suggestions = this.state.stocksData.filter(stock => {
+               console.log(this.state.stocksData)
                 let stockNameLowercased = stock.name.toLowerCase()
                 if (stockNameLowercased.includes(query.toLowerCase())) {
                     return stock

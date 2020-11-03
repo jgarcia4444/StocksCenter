@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StockDetails from '../stockDetails/StockDetails';
-import trackStock from '../actions/TrackStock'
+import trackStock from '../../actions/TrackStock'
 import { connect } from 'react-redux';
 
 class StockDetailsContainer extends Component {
