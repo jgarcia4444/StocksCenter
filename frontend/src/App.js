@@ -6,10 +6,11 @@ import {
   Switch,
   Route
  } from 'react-router-dom';
- import updateCurrentUser from './actions/UpdateCurrentUser';
+import updateCurrentUser from './actions/UpdateCurrentUser';
 
- import LoginPageContainer from './components/auth/login/LoginPageContainer';
- import SignupPageContainer from './components/auth/signup/SignupPageContainer';
+import LoginPageContainer from './components/auth/login/LoginPageContainer';
+import SignupPageContainer from './components/auth/signup/SignupPageContainer';
+import VideosContainer from './components/containers/VideosContainer';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -53,6 +54,9 @@ class App extends Component {
           </Route>
           <Route path="/signup">
             <SignupPageContainer />
+          </Route>
+          <Route path="/videos">
+            <VideosContainer />
           </Route>
           <Route path="/">
             <Home />

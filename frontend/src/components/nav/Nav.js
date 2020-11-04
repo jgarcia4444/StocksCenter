@@ -8,7 +8,7 @@ const Nav = () => {
                 <a className="nav-link active" href="/">Home</a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="/">Videos</a>
+                <a className="nav-link" href="/videos">Videos</a>
             </li>
         </ul>
     )

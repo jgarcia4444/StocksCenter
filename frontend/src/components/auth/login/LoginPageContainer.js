@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoginForm from './LoginForm';
 import signupUser from '../../../actions/SignupUser';
 import { Redirect } from 'react-router-dom'
-
+//
 class LoginPageContainer extends Component {
 
     state = {
@@ -43,8 +43,13 @@ class LoginPageContainer extends Component {
                         redirect: '/',
                         errorMessage: null
                     })
+                    this.refreshPage()
                 }
             })
+    }
+
+    refreshPage = () => {
+        window.location.reload()
     }
 
     outPutErrorMessage = (data) => {
