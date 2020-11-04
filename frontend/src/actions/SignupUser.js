@@ -2,6 +2,7 @@
 
 const signupUser = (data) => {
     let { user, user_stocks } = data
+    console.log(user_stocks)
     return {
         type: 'USER_SIGNUP',
         user: {

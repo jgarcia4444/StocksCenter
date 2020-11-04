@@ -10,7 +10,8 @@ class LoginPageContainer extends Component {
         fetchUrl: "http://localhost:3000/login",
         email: "",
         password: "",
-        errorMessage: ""
+        errorMessage: "",
+        redirect: ""
     }
 
     handleLoginSubmit = (e) => {
@@ -35,7 +36,6 @@ class LoginPageContainer extends Component {
                 if (!data.user) {
                     this.outPutErrorMessage(data)
                 } else {
-                    console.log(data)
                     localStorage.setItem("userId", data.user.id)
                     this.props.signupUser(data)
                     this.setState({

@@ -15,8 +15,6 @@ class SessionController < ApplicationController
     end
 
     def login 
-        puts 'logged in !!!!!!!!'
-        puts "These are the params: #{params}"
         user_email = params[:login_data][:email]
         potential_user = User.find_by(:email => user_email)
         if potential_user

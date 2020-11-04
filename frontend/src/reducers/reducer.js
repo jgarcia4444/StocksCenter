@@ -7,7 +7,7 @@ export default function reducer(state = defaultState, action) {
     switch(action.type) {
         case "TRACK_STOCK":
             var stocks;
-            if (state.trackedStocks) {
+            if (state.trackedStocks.length > 0) {
                 stocks = state.trackedStocks
             } else {
                 stocks = []

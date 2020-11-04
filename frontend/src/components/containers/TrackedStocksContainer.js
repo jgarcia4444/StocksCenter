@@ -8,12 +8,21 @@ import deleteTrackedStock from '../../actions/DeleteTrackedStock';
 class TrackedStocksContainer extends Component {
 
     state = {
-        stockInfo: null,
+        stockInfo: undefined,
         stockFetchUrl: "http://api.marketstack.com/v1",
         dbFetchUrl: "http://localhost:3000",
         deletionMessage: "",
         showDeletionMessage: false
     }
+
+    // componentDidMount() {
+    //     const {trackedStocks} = this.props
+
+    //     if (trackedStocks.length > 0) {
+
+    //     }
+
+    // }
 
     handleTrackedClick = (stock) => {
         let apiKey = process.env.REACT_APP_STOCKS_API_KEY
@@ -35,6 +44,7 @@ class TrackedStocksContainer extends Component {
     }
 
     renderStocks = () => {
+        console.log(this.props)
         return this.props.trackedStocks.map((stock, i) => {
             if (i % 3 === 0) {
                 let stocks = this.props.trackedStocks.slice(i, i + 3)
@@ -84,7 +94,7 @@ class TrackedStocksContainer extends Component {
     }
 
     render() {
-        if ((this.props.trackedStocks !== undefined) && (!this.state.stockInfo)) {
+        if (this.props.trackedStocks !== undefined && !this.state.stockInfo)  {
             return (
                     <div>
                         <h4 id="tracked-stocks-title">Tracked Stocks</h4>
