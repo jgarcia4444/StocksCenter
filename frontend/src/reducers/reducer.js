@@ -17,13 +17,11 @@ export default function reducer(state = defaultState, action) {
                 trackedStocks: stocks.concat(action.stock)
             }
         case "USER_SIGNUP":
-            console.log(action.trackedStocks)
             return {
                 trackedStocks: action.trackedStocks,
                 currentUser: action.user
             }
         case "GET_USER":
-            console.log(action)
             var stocks;
             if (action.trackedStocks.length > 0) {
                 stocks = action.trackedStocks

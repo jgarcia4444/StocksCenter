@@ -9,7 +9,7 @@ const signupUser = (data) => {
             lastName: user.last_name,
             id: user.id
         },
-        trackedStock: user_stocks
+        trackedStocks: user_stocks
     }
 }
 

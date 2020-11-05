@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CredentialsNav from '../credentialsNav/CredentialsNav';
 import './VideosContainer.css'
 import FilterSelector from '../videos/FilterSelector';
+import Nav from '../nav/Nav';
 
 class VideosContainer extends Component {
 
@@ -21,6 +22,7 @@ class VideosContainer extends Component {
                         <h1>Stockscenter</h1>
                     </div>
                 </div>
+                <Nav />
                 <div className="row">
                     <div className="col-12" id="video-section-header">
                         <h3>

@@ -7,31 +7,6 @@
 }
 
 .nav-link:hover {
-    animation: Nav-Link-Border-Wrap;
-    animation-duration: 0.5s;
-    border-bottom: 2px solid black;
-    color: #2d3436;
+    border: 1px solid black
 }
 
-@keyframes Nav-Link-Border-Wrap {
-    0% {
-        border-bottom: 2px solid black;
-    }
-    25% {
-        border-right: 2px solid black;
-        border-bottom: none
-    }
-    50% {
-        border-top: 2px solid black;
-        border-right: none;
-        
-    }
-    75% {
-        border-left: 2px solid black;
-        border-top: none;
-    }
-    100% {
-        border-left: none;
-        border-bottom: 2px solid black;
-    }
-}
