@@ -7,6 +7,35 @@
 }
 
 .nav-link:hover {
-    border: 1px solid black
+    animation: Rising-Tile 1s;
+    border: 1px solid black;
+    box-shadow: 0 0 7px 0 black;
+}
+
+.nav-link:active {
+    animation: Button-Press 0.5s;
+    box-shadow: 0 0 7px 0 black;
+}
+
+@keyframes Rising-Tile {
+    from {
+        box-shadow: none;
+        border: none
+    }
+    to {
+        box-shadow: 0 0 7px 0 black;
+        border: 1px solid black;
+    }
+}
+
+@keyframes Button-Press {
+    from {
+        border: 1px solid black;
+        box-shadow: 0 0 7px 0 black;
+    }
+    to {
+        border: none;
+        box-shadow: none;
+    }
 }
 
