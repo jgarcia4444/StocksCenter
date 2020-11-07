@@ -17,6 +17,10 @@
     box-shadow: 0 0 7px 0 black;
 }
 
+.active-tab {
+    color: white;
+}
+
 @keyframes Rising-Tile {
     from {
         box-shadow: none;

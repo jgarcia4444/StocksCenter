@@ -1,22 +1,22 @@
 import React from 'react'
 import './FilterSelector.css'
 
-const FilterSelector = () => {
-
+const FilterSelector = (props) => {
 
     return (
         <div className="filter-selector">
-            <div className="filter-option">
+            <div onClick={() => props.handleFilterClick("beginner")}  className="filter-option">
                 Beginner
             </div>
-            <div className="filter-option">
+            <div onClick={() => props.handleFilterClick("intermediate")} className="filter-option">
                 Intermediate
             </div>
-            <div className="filter-option">
+            <div onClick={() => props.handleFilterClick("advanced")} className="filter-option">
                 Advanced
             </div>
         </div>
     )
+
 }
 
 export default FilterSelector;

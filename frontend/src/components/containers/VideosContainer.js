@@ -6,9 +6,15 @@ import Nav from '../nav/Nav';
 
 class VideosContainer extends Component {
 
-    // state = {
+    state = {
+        filterSelected: ""
+    }
 
-    // }
+    handleFilterClick = (filter) => {
+        this.setState({
+            filterSelected: filter
+        })
+    }
 
     render() {
 
@@ -25,15 +31,12 @@ class VideosContainer extends Component {
                 <Nav />
                 <div className="row">
                     <div className="col-12" id="video-section-header">
-                        <h3>
-                            Videos
-                        </h3>
                         <p>Here are some of the top stock advice videos organized for you.</p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
-                        <FilterSelector />
+                        <FilterSelector handleFilterClick={this.handleFilterClick} />
                     </div>
                 </div>
                 <div className="row">
