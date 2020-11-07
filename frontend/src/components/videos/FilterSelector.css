@@ -1,0 +1,118 @@
+
+.filter-option {
+    padding: 10px;
+    display: inline-block;
+    background: -webkit-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+    background: -moz-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+    background: -ms-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+    background: -o-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+    background: linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+}
+
+.filter-option:first-child {
+    border: 3px solid #0984e3;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.filter-option:first-child:hover {
+    box-shadow: -1px 1px 3px 0 black;
+}
+
+.filter-option:first-child:active {
+    box-shadow: none;
+}
+
+.filter-option:last-child {
+    border: 3px solid #0984e3;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.filter-option:last-child:hover {
+    box-shadow: 1px 1px 3px 0 black;
+}
+
+.filter-option:last-child:active {
+    box-shadow: none;
+}
+
+.filter-option:nth-child(2) {
+    border-top: 3px solid #0984e3;
+    border-bottom: 3px solid #0984e3;
+}
+
+.filter-option:nth-child(2):hover {
+    box-shadow: 0 1px 3px 0 black;
+}
+
+.filter-option:nth-child(2):active {
+    box-shadow: none;
+}
+
+@media all and (max-width: 1024px) {
+    .filter-option {
+        font-size: 12px;
+        padding: 6px;
+    }
+    .filter-option:first-child {
+        border: 2px solid #0984e3;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .filter-option:last-child {
+        border: 2px solid #0984e3;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .filter-option:nth-child(2) {
+        border-top: 2px solid #0984e3;
+        border-bottom: 2px solid #0984e3;
+    }
+} 
+
+@media all and (max-width: 768px) {
+    .filter-option {
+        font-size: 10px;
+        padding: 2px;
+    }
+}
+
+@media all and (max-width: 503px) {
+    .filter-option {
+        font-size: 8px;
+        display: block;
+        text-align: center;
+    }
+    .filter-option:first-child {
+        border: 2px solid #0984e3;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .filter-option:first-child:hover {
+        box-shadow: 0 -1px 3px 0 black; 
+    }
+
+    .filter-option:last-child {
+        border: 2px solid #0984e3;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 0px;
+    }
+
+    .filter-option:last-child:hover {
+        box-shadow: 0 1px 3px 0 black;
+    }
+
+    .filter-option:nth-child(2) {
+        border-right: 2px solid #0984e3;
+        border-left: 2px solid #0984e3;
+    }
+
+    .filter-option:nth-child(2):hover {
+        box-shadow: -1px 0 3px 0 black, 1px 0px 3px black;
+    }
+
+}

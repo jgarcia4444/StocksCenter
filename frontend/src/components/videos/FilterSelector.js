@@ -1,17 +1,18 @@
 import React from 'react'
+import './FilterSelector.css'
 
 const FilterSelector = () => {
 
 
     return (
         <div className="filter-selector">
-            <div>
+            <div className="filter-option">
                 Beginner
             </div>
-            <div>
+            <div className="filter-option">
                 Intermediate
             </div>
-            <div>
+            <div className="filter-option">
                 Advanced
             </div>
         </div>

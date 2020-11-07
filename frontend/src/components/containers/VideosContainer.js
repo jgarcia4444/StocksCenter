@@ -32,7 +32,7 @@ class VideosContainer extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-6">
                         <FilterSelector />
                     </div>
                 </div>
