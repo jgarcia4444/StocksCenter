@@ -3,44 +3,53 @@ import CredentialsNav from '../credentialsNav/CredentialsNav';
 import './VideosContainer.css'
 import FilterSelector from '../videos/FilterSelector';
 import Nav from '../nav/Nav';
+import VideoFeedError from '../videos/VideoFeedError';
+import VideoFeedContainer from '../videos/VideoFeedContainer';
 
 class VideosContainer extends Component {
 
-    state = {
-        filterSelected: "beginner",
-        videos: [],
+    constructor() {
+        super()
+        this.state = {
+            filterSelected: "beginner",
+            videos: [],
+            errorMessage: ""
+        }
     }
+
+    
 
     handleFilterClick = (filter) => {
         this.setState({
             filterSelected: filter
         })
+        this.fetchVideos(filter)
     }
 
-    componentDidUpdate() {
+    fetchVideos = (filter) => {
         console.log(this.state)
-    }
-
-    componentDidMount() {
-        this.fetchVideos()
-    }
-
-    fetchVideos = () => {
+        console.log(filter)
         const key = process.env.REACT_APP_YOUTUBE_API_KEY
-        const query = this.state.filterSelected + " stock advice"
+        const query = filter + " stock advice"
         const url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=" + query + "&key=" + key
         fetch(url)
             .then(res => res.json())
-            .then(data => this.setState({
-                ...this.state,
-                videos: data.items
-            }))
+            .then(data => {
+                if (data.error) {
+                    this.setState({
+                        ...this.state,
+                        errorMessage: data.error.message
+                    })
+                } else {
+                    this.setState({
+                        ...this.state,
+                        videos: data.items
+                    })
+                }
+            })
     }
 
     render() {
-
-
-
         return (
             <div className="container Home">
                 <CredentialsNav />
@@ -62,7 +71,7 @@ class VideosContainer extends Component {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {/* Video feed component */}
+                        {this.state.errorMessage !== "" ? <VideoFeedError error={this.state.errorMessage} /> : <VideoFeedContainer videos={this.state.videos}/> }
                     </div>
                 </div>
             </div>
