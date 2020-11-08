@@ -1,21 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import VideoContainer from './VideoContainer';
 
 class VideoFeedContainer extends Component {
 
     constructor(props) {
         super(props)
-
+        
     }
 
-    renderVideos = () => {
-        console.log("Hello World")
+    renderVideoContainers = () => {
+        return this.props.videos.map(video => {
+            return <VideoContainer video={video} />
+        })
     }
 
     render() {
 
         return (
-            <div>
-                {this.renderVideos()}
+            <div className="video-feed-container container">
+                {this.renderVideoContainers()}
             </div>
             
         )

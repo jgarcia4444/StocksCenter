@@ -13,7 +13,7 @@ class VideosContainer extends Component {
         this.state = {
             filterSelected: "beginner",
             videos: [],
-            errorMessage: ""
+            error: undefined
         }
     }
 
@@ -27,8 +27,6 @@ class VideosContainer extends Component {
     }
 
     fetchVideos = (filter) => {
-        console.log(this.state)
-        console.log(filter)
         const key = process.env.REACT_APP_YOUTUBE_API_KEY
         const query = filter + " stock advice"
         const url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=" + query + "&key=" + key
@@ -36,14 +34,16 @@ class VideosContainer extends Component {
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
+                    console.log(data.error)
                     this.setState({
                         ...this.state,
-                        errorMessage: data.error.message
+                        error: data.error
                     })
                 } else {
                     this.setState({
                         ...this.state,
-                        videos: data.items
+                        videos: data.items,
+                        error: undefined
                     })
                 }
             })
@@ -71,7 +71,7 @@ class VideosContainer extends Component {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {this.state.errorMessage !== "" ? <VideoFeedError error={this.state.errorMessage} /> : <VideoFeedContainer videos={this.state.videos}/> }
+                        {this.state.error ? <VideoFeedError error={this.state.error} /> : <VideoFeedContainer videos={this.state.videos}/> }
                     </div>
                 </div>
             </div>
