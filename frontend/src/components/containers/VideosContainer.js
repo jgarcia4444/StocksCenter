@@ -7,13 +7,30 @@ import Nav from '../nav/Nav';
 class VideosContainer extends Component {
 
     state = {
-        filterSelected: ""
+        filterSelected: "beginner",
+        videos: [],
     }
 
     handleFilterClick = (filter) => {
         this.setState({
             filterSelected: filter
         })
+    }
+
+    componentDidMount() {
+        const key = process.env.REACT_APP_YOUTUBE_API_KEY
+        // const options = {
+        //     method: "GET",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     }
+        // }
+        const query = this.state.filterSelected + " stock advice"
+        const url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=" + query + "&key=" + key
+        fetch(url)
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     render() {
