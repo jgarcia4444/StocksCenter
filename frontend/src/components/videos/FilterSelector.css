@@ -9,6 +9,10 @@
     background: linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
 }
 
+.filter-option:hover {
+    cursor: pointer;
+}
+
 .filter-option:first-child {
     border: 3px solid #0984e3;
     border-top-left-radius: 5px;
@@ -85,7 +89,10 @@
         text-align: center;
     }
     .filter-option:first-child {
-        border: 2px solid #0984e3;
+        border-top: 2px solid #0984e3;
+        border-left: 2px solid #0984e3;
+        border-right: 2px solid #0984e3;
+        border-bottom: 1px solid #0984e3;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         border-bottom-left-radius: 0px;
@@ -96,7 +103,10 @@
     }
 
     .filter-option:last-child {
-        border: 2px solid #0984e3;
+        border-top: 1px solid #0984e3;
+        border-left: 2px solid #0984e3;
+        border-right: 2px solid #0984e3;
+        border-bottom: 2px solid #0984e3;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-top-right-radius: 0px;
@@ -109,6 +119,8 @@
     .filter-option:nth-child(2) {
         border-right: 2px solid #0984e3;
         border-left: 2px solid #0984e3;
+        border-top: 1px solid #0984e3;
+        border-bottom: 1px solid #0984e3;
     }
 
     .filter-option:nth-child(2):hover {
