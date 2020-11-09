@@ -5,21 +5,34 @@ import likeVideo from '../../actions/LikeVideo';
 
 class VideoContainer extends Component {
 
+
     constructor(props) {
         super(props)
         this.state = {
-            isLiked: false
+            isLiked: false,
+            videoId: this.props.video.id.videoId
         }
     }
 
     componentDidMount() {
-        const { videoId } = this.props.video.id
-        // When loaded check redux store if it is part of the liked videos
-        if (this.props.videoIds.includes(videoId)) {
+        if (this.videoIsLiked()) {
             this.setState({
                 ...this.state,
                 isLiked: true
             })
+        }
+    }
+
+    videoIsLiked = () => {
+        if (this.props.videoIds !== [] && this.props.videoIds !== undefined) {
+            let { videoIds } = this.props
+            if (videoIds.includes(this.state.videoId)) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
         }
     }
 
@@ -108,7 +121,7 @@ class VideoContainer extends Component {
                     </div>
                     <div className="row video-thumbnail-row">
                         <div className="col-12 video-thumbnail">
-                            <img src={snippet.default.url}/>
+                            <img src={snippet.thumbnails.default.url}/>
                         </div>
                     </div>
                     <div className="row like-video-row">

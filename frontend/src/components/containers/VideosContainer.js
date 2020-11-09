@@ -40,6 +40,7 @@ class VideosContainer extends Component {
                         error: data.error
                     })
                 } else {
+                    console.log(data.items)
                     this.setState({
                         ...this.state,
                         videos: data.items,
@@ -61,7 +62,7 @@ class VideosContainer extends Component {
                 <Nav />
                 <div className="row">
                     <div className="col-12" id="video-section-header">
-                        <p>Here are some of the top stock advice videos organized for you.</p>
+                        <p>Click one option below to get some stock advice videos based on your level of understanding.</p>
                     </div>
                 </div>
                 <div className="row">
