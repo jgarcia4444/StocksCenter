@@ -66,8 +66,8 @@ class SignupPageContainer extends Component {
                 .then(res => res.json())
                 .then(json => {
                     if (json.user.id) {
-                        const { user, user_stocks } = json
-                        this.props.signupUser({user, user_stocks})
+                        const { user, user_stocks, user_videos } = json
+                        this.props.signupUser({user, user_stocks, user_videos})
                         localStorage.setItem("userId", user.id)
                         this.setState({
                             ...this.state,

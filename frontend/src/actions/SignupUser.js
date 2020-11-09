@@ -1,7 +1,7 @@
-
+//
 
 const signupUser = (data) => {
-    let { user, user_stocks } = data
+    let { user, user_stocks, user_videos } = data
     return {
         type: 'USER_SIGNUP',
         user: {
@@ -9,7 +9,8 @@ const signupUser = (data) => {
             lastName: user.last_name,
             id: user.id
         },
-        trackedStocks: user_stocks
+        trackedStocks: user_stocks,
+        userVideoIds: user_videos
     }
 }
 

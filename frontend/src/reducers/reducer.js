@@ -14,11 +14,13 @@ export default function reducer(state = defaultState, action) {
                 stocks = []
             }
             return {
+                ...state,
                 currentUser: state.currentUser,
                 trackedStocks: stocks.concat(action.stock)
             }
         case "USER_SIGNUP":
             return {
+                userVideoIds: action.userVideoIds,
                 trackedStocks: action.trackedStocks,
                 currentUser: action.user
             }
@@ -30,16 +32,16 @@ export default function reducer(state = defaultState, action) {
                 stocks = []
             }
             return {
+                ...state,
                 trackedStocks: stocks,
                 currentUser: action.currentUser
             }
         case "LOGOUT_USER":
             localStorage.removeItem("userId");
             return {
-                trackedStocks: [],
-                currentUser: {}
+                ...defaultState
             }
-        case 'LOAD_USER_VIDES':
+        case 'LOAD_USER_VIDEOS':
             return {
                 ...state,
                 userVideoIds: action.userVideoIds

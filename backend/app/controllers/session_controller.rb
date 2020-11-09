@@ -4,10 +4,11 @@ class SessionController < ApplicationController
         user = User.create(user_params)
         if user.valid?
             user_stocks = user.user_stocks
-            if user_stocks.count < 1
-                user_stocks = []
-            end
-            render :json => {user: user, user_stocks: user_stocks}
+            user_videos = user.user_videos
+            # if user_stocks.count < 1
+            #     user_stocks = []
+            # end
+            render :json => {user: user, user_stocks: user_stocks, user_videos: user_videos}
         else
             errors = user.errors
             render :json => errors
