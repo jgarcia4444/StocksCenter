@@ -13,7 +13,14 @@ class VideoContainer extends Component {
     }
 
     componentDidMount() {
+        const { videoId } = this.props.video.id
         // When loaded check redux store if it is part of the liked videos
+        if (this.props.videoIds.includes(videoId)) {
+            this.setState({
+                ...this.state,
+                isLiked: true
+            })
+        }
     }
 
     persistLikedVideo = (id) => {
