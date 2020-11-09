@@ -1,6 +1,6 @@
 
 const updateCurrentUser = (json) => {
-    const {user, user_stocks, user_video_ids} = json
+    const {user, user_stocks, user_videos} = json
     return {
         type: "GET_USER",
         currentUser: {
@@ -9,7 +9,7 @@ const updateCurrentUser = (json) => {
             lastName: user.last_name,
         }, 
         trackedStocks: user_stocks,
-        userVideoIds: user_video_ids
+        userVideoIds: user_videos
     }
 }
 

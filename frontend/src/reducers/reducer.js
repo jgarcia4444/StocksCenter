@@ -31,6 +31,7 @@ export default function reducer(state = defaultState, action) {
             } else {
                 stocks = []
             }
+            console.log(action)
             return {
                 userVideoIds: action.userVideoIds,
                 trackedStocks: stocks,
