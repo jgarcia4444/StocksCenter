@@ -96,7 +96,7 @@ class TrackedStocksContainer extends Component {
     render() {
         if (this.props.trackedStocks !== undefined && !this.state.stockInfo)  {
             return (
-                    <div>
+                    <div className="container">
                         <h4 id="tracked-stocks-title">Tracked Stocks</h4>
                         <div className="tracked-stocks-container">
                             {this.renderStocks()}

@@ -1,4 +1,17 @@
 class UserVideosController < ApplicationController
+
+    def index 
+        puts "Videos retrieved"
+        user = User.find(params[:user_id])
+        if user 
+            render :json => {
+                user: user,
+                user_stocks: user.user_stocks,
+                user_videos: user.user_videos
+            }
+        end
+    end
+
     def create
         puts 'Video Favorited'
         new_user_video = UserVideo.create(user_videos_params)
