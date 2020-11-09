@@ -32,7 +32,7 @@ export default function reducer(state = defaultState, action) {
                 stocks = []
             }
             return {
-                ...state,
+                userVideoIds: action.userVideoIds,
                 trackedStocks: stocks,
                 currentUser: action.currentUser
             }

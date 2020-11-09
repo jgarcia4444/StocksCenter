@@ -10,7 +10,10 @@ class VideoContainer extends Component {
         super(props)
         this.state = {
             isLiked: false,
-            videoId: this.props.video.id.videoId
+            videoId: this.props.video.id.videoId,
+            hasLikeError: false,
+            hasUnlikeError: false,
+            errorMessage: ""
         }
     }
 
@@ -59,6 +62,7 @@ class VideoContainer extends Component {
                     this.props.likeVideo(this.state.videoId)
                 } else {
                     // Handle error of either not being able to like due to not being logged in or a duplicate like
+
 
                 }
             })
