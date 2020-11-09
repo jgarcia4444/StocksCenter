@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_031244) do
+ActiveRecord::Schema.define(version: 2020_11_09_010553) do
 
   create_table "user_stocks", force: :cascade do |t|
     t.integer "user_id"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_031244) do
 
   create_table "user_videos", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "video_id"
+    t.string "video_id"
   end
 
   create_table "users", force: :cascade do |t|

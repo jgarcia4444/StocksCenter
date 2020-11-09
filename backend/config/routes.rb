@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :users, only: [:show] do
     resources :user_stocks, only: [:create, :destroy]
-    resources :user_videos, only: [:create, :destroy]
+    resources :user_videos, only: [:create, :destroy, :show]
   end
   get 'get-user', to: 'session#get_user'
 end
