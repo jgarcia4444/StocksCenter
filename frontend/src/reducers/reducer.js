@@ -1,6 +1,7 @@
 const defaultState = {
     currentUser: {},
-    trackedStocks: []
+    trackedStocks: [],
+    userVideoIds: []
 }
 
 export default function reducer(state = defaultState, action) {
@@ -37,6 +38,11 @@ export default function reducer(state = defaultState, action) {
             return {
                 trackedStocks: [],
                 currentUser: {}
+            }
+        case 'LOAD_USER_VIDES':
+            return {
+                ...state,
+                userVideoIds: action.userVideoIds
             }
         case 'DELETE_STOCK':
             return {

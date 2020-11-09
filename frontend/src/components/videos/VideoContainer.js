@@ -6,8 +6,12 @@ class VideoContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // Liked state tracker.
+            isLiked: false
         }
+    }
+
+    componentDidMount() {
+        // When loaded check redux store if it is part of the liked videos
     }
 
     render() {
