@@ -10,7 +10,7 @@ class VideoFeedContainer extends Component {
 
     renderVideoContainers = () => {
         return this.props.videos.map(video => {
-            return <VideoContainer video={video} />
+            return <VideoContainer key={video.id.videoId} video={video} />
         })
     }
 

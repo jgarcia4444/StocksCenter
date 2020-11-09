@@ -49,7 +49,7 @@ export default function reducer(state = defaultState, action) {
         case "LIKE_VIDEO":
             return {
                 ...state,
-                userVideoIds: this.state.userVideoIds.concat(action.videoId)
+                userVideoIds: state.userVideoIds.concat(action.videoId)
             }
         case 'DELETE_STOCK':
             return {

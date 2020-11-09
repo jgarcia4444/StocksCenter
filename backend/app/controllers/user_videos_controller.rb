@@ -16,10 +16,14 @@ class UserVideosController < ApplicationController
         puts 'Video Favorited'
         user = User.find(params[:user_video][:user_id])
         if user 
-            if !user.user_videos.find(params[:user_video][:video_id])
+            if !UserVideo.find_by(user_id: user.id, video_id: params[:user_video][:video_id])
                 new_user_video = UserVideo.create(user_videos_params)
                 if new_user_video
-                    render :json => {saved: true, new_user_video: new_user_video, message: "Video Liked and change persisted."}
+                    render :json => {
+                        saved: true, 
+                        new_user_video: new_user_video, 
+                        message: "Video Liked and change persisted."
+                    }
                 else
                     render :json => { 
                         saved: false, 

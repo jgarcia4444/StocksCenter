@@ -55,10 +55,11 @@ class VideoContainer extends Component {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (!data.error) {
-                    // Like the video in the redux store.
+                if (data.saved) {
+                    this.props.likeVideo(this.state.videoId)
                 } else {
-                    // Handle error of either not being able to like a video or duplicate like
+                    // Handle error of either not being able to like due to not being logged in or a duplicate like
+
                 }
             })
     }
@@ -145,7 +146,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        likeVideo
+        likeVideo: (id) => dispatch(likeVideo(id))
     }
 }
 
