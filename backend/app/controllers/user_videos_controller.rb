@@ -14,9 +14,25 @@ class UserVideosController < ApplicationController
 
     def create
         puts 'Video Favorited'
-        new_user_video = UserVideo.create(user_videos_params)
-        if new_user_video
-            render :json => {new_user_video: new_user_video, message: "Video Liked and change persisted."}
+        user = User.find(params[:user_video][:user_id])
+        if user 
+            if !user.user_videos.find(params[:user_video][:video_id])
+                new_user_video = UserVideo.create(user_videos_params)
+                if new_user_video
+                    render :json => {saved: true, new_user_video: new_user_video, message: "Video Liked and change persisted."}
+                else
+                    render :json => { 
+                        saved: false, 
+                        message: "Unable to persist to the db." 
+                    }
+                end
+            else
+                render :json => { 
+                    saved: false, 
+                    message: "This video has already been liked and should not have reached this route" 
+                }
+            end
+        else
         end
     end
 

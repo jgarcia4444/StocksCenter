@@ -51,7 +51,7 @@ class VideoContainer extends Component {
                 }
             })
         }
-        fetch(`http://localhost:3000/user/${userId}/user_videos`, options)
+        fetch(`http://localhost:3000/users/${userId}/user_videos`, options)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -78,7 +78,7 @@ class VideoContainer extends Component {
                 }
             })
         }
-        fetch(`http://localhost:3000/user/${userId}/user_videos`, options)
+        fetch(`http://localhost:3000/users/${userId}/user_videos/${id}`, options)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -108,7 +108,7 @@ class VideoContainer extends Component {
 
         return (
             <div className="row video-container">
-                <div classnName="col-12">
+                <div className="col-12">
                     <div className="row video-title-row">
                         <div className="col-12 video-title">
                             {snippet.title}
