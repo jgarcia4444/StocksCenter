@@ -47,7 +47,11 @@ class UserVideosController < ApplicationController
         video_to_be_removed = UserVideo.find_by(:user_id => user_id, :video_id => video_id)
         if video_to_be_removed 
             video_to_be_removed.destroy
-            render :json => {video_id: video_id, message: "Video like removed and change persisted."}
+            render :json => {
+                saved: true,
+                video_id: video_id, 
+                message: "Video like removed and change persisted."
+            }
         end
     end
 

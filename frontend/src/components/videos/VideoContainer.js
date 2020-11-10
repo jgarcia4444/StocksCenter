@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './VideoContainer.css';
 import likeVideo from '../../actions/LikeVideo';
+import unlikeVideo from '../../actions/UnlikeVideo';
 
 class VideoContainer extends Component {
 
@@ -87,8 +88,9 @@ class VideoContainer extends Component {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (!data.error) {
+                if (data.saved) {
                     // Unlike the video in the redux store
+                    this.props.unlikeVideo(data.video_id)
                 } else {
                     // Handle error of either not being able to like a video or duplicate like
                 }
@@ -150,7 +152,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        likeVideo: (id) => dispatch(likeVideo(id))
+        likeVideo: (id) => dispatch(likeVideo(id)),
+        unlikeVideo: (id) => dispatch(unlikeVideo(id))
     }
 }
 

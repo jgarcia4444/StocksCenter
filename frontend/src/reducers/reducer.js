@@ -52,6 +52,11 @@ export default function reducer(state = defaultState, action) {
                 ...state,
                 userVideoIds: state.userVideoIds.concat(action.videoId)
             }
+        case "UNLIKE_VIDEO":
+            return {
+                ...state,
+                userVideoIds: state.userVideoIds.filter(videoId => videoId !== action.videoId)
+            }
         case 'DELETE_STOCK':
             return {
                 currentUser: state.currentUser,
