@@ -14,7 +14,8 @@ class VideoContainer extends Component {
             videoId: this.props.video.id.videoId,
             hasLikeError: false,
             hasUnlikeError: false,
-            errorMessage: ""
+            errorMessage: "",
+            videoFrame: undefined
         }
     }
 
@@ -25,6 +26,9 @@ class VideoContainer extends Component {
                 isLiked: true
             })
         }
+        
+        this.loadiFrameVideo()
+
     }
 
     videoIsLiked = () => {
@@ -109,6 +113,29 @@ class VideoContainer extends Component {
         }
     }
 
+    loadiFrameVideo = () => {
+        const api_key = process.env.REACT_APP_YOUTUBE_API_KEY
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=player&id=${this.state.videoId}&key=${api_key}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.items.length > 0) {
+                    let { player } = data.items[0]
+                    let parser = new DOMParser()
+                    let doc = parser.parseFromString(player.embedHtml, 'text/html')
+                    let iFrame = doc.body.firstChild
+                    let videoDetails = {
+                        height: iFrame.height,
+                        width: iFrame.width,
+                        src: iFrame.src
+                    }
+                    this.setState({
+                        ...this.state,
+                        videoDetails: videoDetails
+                    })
+                }
+            })
+    }
+
     render() {
 
         const { id, snippet } = this.props.video
@@ -116,24 +143,27 @@ class VideoContainer extends Component {
         return (
             <div className="row video-container">
                 <div className="col-12">
-                    <div className="row video-title-row">
+                    <div className="row video-title-row text-center">
                         <div className="col-12 video-title">
                             {snippet.title}
                         </div>
                     </div>
-                    <div className="row video-description-row">
-                        <div className="col-12 video-description">
-                            {snippet.description}
+                    <div className="row video-thumbnail-row text-center">
+                        <div className="col-12 video-col">
+                            { this.state.videoDetails ? 
+                                <iframe className="video" width={this.state.videoDetails.width} height={this.state.videoDetails.height} src={this.state.videoDetails.src}></iframe> 
+                                :
+                                <img src={snippet.thumbnails.medium.url} alt="youtube video thumbnail" />
+                            }
+                            
                         </div>
                     </div>
-                    <div className="row video-thumbnail-row">
-                        <div className="col-12 video-thumbnail">
-                            <img src={snippet.thumbnails.default.url}/>
-                        </div>
-                    </div>
-                    <div className="row like-video-row">
+                    <div className="row like-video-row text-center">
                         <div className="col-4">
                             <button onClick={() => this.handleLikeClick(id.videoId)} type="button" className={this.state.isLiked ? "like-button btn btn-danger" : "like-button btn btn-light" } >{this.state.isLiked ? "Unlike" : "Like"}</button>
+                        </div>
+                        <div className="col-8 video-description">
+                            {snippet.description}
                         </div>
                     </div>
                 </div>
