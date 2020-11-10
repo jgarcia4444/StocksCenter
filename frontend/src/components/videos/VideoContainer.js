@@ -58,6 +58,7 @@ class VideoContainer extends Component {
                     user_id: userId
                 }
             })
+        
         }
         fetch(`http://localhost:3000/users/${userId}/user_videos`, options)
             .then(res => res.json())
@@ -70,7 +71,7 @@ class VideoContainer extends Component {
 
 
                 }
-            })
+            })  
     }
 
     persistUnlikeToVideo = (id) => {
@@ -102,15 +103,25 @@ class VideoContainer extends Component {
     }
 
     handleLikeClick = (videoId) => {
-        this.setState({
+        if (this.props.user.id) {
+            this.setState({
             ...this.state,
             isLiked: !this.state.isLiked
-        })
-        if (!this.state.isLiked) {
-            this.persistLikedVideo(videoId)
+            })
+            if (!this.state.isLiked) {
+                this.persistLikedVideo(videoId)
+            } else {
+                this.persistUnlikeToVideo(videoId)
+            }
         } else {
-            this.persistUnlikeToVideo(videoId)
+            this.setState({
+                ...this.state,
+                hasLikeError: true,
+                errorMessage: "You must be signed in to liked a video."
+            })
+            setTimeout(this.dismissErrorAlert, 3000)
         }
+        
     }
 
     loadiFrameVideo = () => {
@@ -136,6 +147,14 @@ class VideoContainer extends Component {
             })
     }
 
+    dismissErrorAlert = () => {
+        this.setState({
+            ...this.state,
+            hasLikeError: false,
+            errorMessage: ""
+        })
+    }
+
     render() {
 
         const { id, snippet } = this.props.video
@@ -148,6 +167,16 @@ class VideoContainer extends Component {
                             {snippet.title}
                         </div>
                     </div>
+                    {this.state.hasLikeError ? 
+                        <div className="alert alert-danger">
+                            {this.state.errorMessage}
+                            <button onClick={this.dismissErrorAlert} type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div> 
+                        : 
+                        null
+                    }
                     <div className="row video-thumbnail-row text-center">
                         <div className="col-12 video-col">
                             { this.state.videoDetails ? 
@@ -161,9 +190,6 @@ class VideoContainer extends Component {
                     <div className="row like-video-row text-center">
                         <div className="col-4">
                             <button onClick={() => this.handleLikeClick(id.videoId)} type="button" className={this.state.isLiked ? "like-button btn btn-danger" : "like-button btn btn-light" } >{this.state.isLiked ? "Unlike" : "Like"}</button>
-                        </div>
-                        <div className="col-8 video-description">
-                            {snippet.description}
                         </div>
                     </div>
                 </div>

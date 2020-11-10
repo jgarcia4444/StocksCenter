@@ -4,7 +4,7 @@ import './FilterSelector.css'
 const FilterSelector = (props) => {
 
     return (
-        <div className="filter-selector">
+        <div className={props.className}>
             <div onClick={() => props.handleFilterClick("beginner")} className="filter-option">
                 Beginner
             </div>
