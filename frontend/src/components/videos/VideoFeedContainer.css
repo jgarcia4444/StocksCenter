@@ -1,0 +1,6 @@
+.video-feed-container {
+    box-shadow: inset 0 5px 5px 0 black;
+    height: 80vh;
+    overflow: scroll;
+    margin-top: 2%;
+}

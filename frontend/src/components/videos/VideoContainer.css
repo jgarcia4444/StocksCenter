@@ -3,8 +3,16 @@
 }
 
 .video-title {
+    margin-top:3%;
     font-weight: bold;
     font-size: 24px;
+}
+
+.video-container {
+    width: 80%;
+    box-shadow: 0 5px 5px 0 black;
+    margin: 5% auto;
+    padding-bottom: 2%;
 }
 
 .video-description-row {
@@ -21,4 +29,12 @@
 
 .video-thumbnail {
     
+}
+
+.video {
+    box-shadow: 0 7px 5px 0 black;
+    border-bottom: 4px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    border-top: 1px solid black;
 }

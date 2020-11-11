@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VideoContainer from './VideoContainer';
+import './VideoFeedContainer.css';
 
 class VideoFeedContainer extends Component {
 
