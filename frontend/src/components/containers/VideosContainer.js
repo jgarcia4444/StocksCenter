@@ -6,6 +6,8 @@ import Nav from '../nav/Nav';
 import VideoFeedError from '../videos/VideoFeedError';
 import VideoFeedContainer from '../videos/VideoFeedContainer';
 import ShowLikedVideos from '../videos/ShowLikedVideos';
+import removeDisplayedVideo from '../../actions/RemoveDisplayedVideo';
+import loadVideosToDisplay from '../../actions/LoadVideosToDisplay'
 import { connect } from 'react-redux';
 
 class VideosContainer extends Component {
@@ -14,7 +16,6 @@ class VideosContainer extends Component {
         super()
         this.state = {
             filterSelected: "beginner",
-            videos: [],
             error: undefined,
             showLikedVideos: false,
             likedButttonClassName: "btn btn-light"
@@ -39,18 +40,18 @@ class VideosContainer extends Component {
                     })
                     this.setState({
                         ...this.state,
-                        videos: videos,
                         showLikedVideos: true,
                         likedButttonClassName: "btn btn-success"
                     })
+                    this.props.loadVideosToDisplay(videos)
             })
         } else {
             this.setState({
                 ...this.state,
-                videos: [],
                 showLikedVideos: false,
                 likedButttonClassName: "btn btn-light"
             })
+            this.props.loadVideosToDisplay([])
         }
         
     }    
@@ -70,23 +71,22 @@ class VideosContainer extends Component {
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
-                    console.log(data.error)
                     this.setState({
                         ...this.state,
                         error: data.error
                     })
                 } else {
-                    console.log(data.items)
                     this.setState({
                         ...this.state,
-                        videos: data.items,
                         error: undefined
                     })
+                    this.props.loadVideosToDisplay(data.items)
                 }
             })
     }
 
     render() {
+        console.log(this.props.videosToBeDisplayed)
 
         return (
             <div className="container Home">
@@ -112,7 +112,7 @@ class VideosContainer extends Component {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {this.state.error ? <VideoFeedError error={this.state.error} /> : <VideoFeedContainer videos={this.state.videos}/> }
+                        {this.state.error ? <VideoFeedError error={this.state.error} /> : <VideoFeedContainer videos={this.props.videosToDisplay}/> }
                     </div>
                 </div>
             </div>
@@ -123,11 +123,15 @@ class VideosContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        userVideoIds: state.userVideoIds
+        userVideoIds: state.userVideoIds,
+        videosToDisplay: state.videosToDisplay
     }
 }
 
 export default connect(
     mapStateToProps,
-    null
+    { 
+        removeDisplayedVideo,
+        loadVideosToDisplay
+     }
 )(VideosContainer);

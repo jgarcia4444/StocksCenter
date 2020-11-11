@@ -1,7 +1,8 @@
 const defaultState = {
     currentUser: {},
     trackedStocks: [],
-    userVideoIds: []
+    userVideoIds: [],
+    videosToDisplay: [],
 }
 
 export default function reducer(state = defaultState, action) {
@@ -20,6 +21,7 @@ export default function reducer(state = defaultState, action) {
             }
         case "USER_SIGNUP":
             return {
+                ...state,
                 userVideoIds: action.userVideoIds,
                 trackedStocks: action.trackedStocks,
                 currentUser: action.user
@@ -33,6 +35,7 @@ export default function reducer(state = defaultState, action) {
             }
             console.log(action)
             return {
+                ...state,
                 userVideoIds: action.userVideoIds,
                 trackedStocks: stocks,
                 currentUser: action.currentUser
@@ -62,7 +65,16 @@ export default function reducer(state = defaultState, action) {
                 currentUser: state.currentUser,
                 trackedStocks: state.trackedStocks.filter(stock => stock.stock_symbol !== action.stock_symbol)
             }
-            
+        case 'REMOVE_DISPLAYED_VIDEO':
+            return {
+                ...state,
+                videosToDisplay: state.videosToDisplay.filter(video => video.id.videoId !== action.videoId)
+            }
+            case "LOAD_VIDEOS_TO_DISPLAY":
+                return {
+                    ...state,
+                    videosToDisplay: action.videosToDisplay
+                }
         default:
             return state
     }
