@@ -58,7 +58,9 @@ export default class SearchContainer extends Component {
            let suggestions = this.state.stocksData.filter(stock => {
                 let stockNameLowercased = stock.name.toLowerCase()
                 if (stockNameLowercased.includes(query.toLowerCase())) {
-                    return stock
+                    return true;
+                } else {
+                    return false;
                 }
             })
             if (this.state.selectedStock) {

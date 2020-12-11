@@ -19,13 +19,13 @@ const LoginForm = (props) => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
-                            <input onChange={props.handleInputChange} type="email" name="email" value={props.email} />
+                            <input className="form-control" id="email" onChange={props.handleInputChange} type="email" name="email" value={props.email} />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input onChange={props.handleInputChange} type="password" name="password" value={props.password} />
+                            <input className="form-control" id="password" onChange={props.handleInputChange} type="password" name="password" value={props.password} />
                         </div>
                     </div>
                 </div>

@@ -6,9 +6,9 @@ const defaultState = {
 }
 
 export default function reducer(state = defaultState, action) {
+    var stocks;
     switch(action.type) {
         case "TRACK_STOCK":
-            var stocks;
             if (state.trackedStocks.length > 0) {
                 stocks = state.trackedStocks
             } else {
@@ -27,13 +27,11 @@ export default function reducer(state = defaultState, action) {
                 currentUser: action.user
             }
         case "GET_USER":
-            var stocks;
             if (action.trackedStocks.length > 0) {
                 stocks = action.trackedStocks
             } else {
                 stocks = []
             }
-            console.log(action)
             return {
                 ...state,
                 userVideoIds: action.userVideoIds,

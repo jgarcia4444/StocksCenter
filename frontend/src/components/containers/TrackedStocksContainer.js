@@ -15,15 +15,6 @@ class TrackedStocksContainer extends Component {
         showDeletionMessage: false
     }
 
-    // componentDidMount() {
-    //     const {trackedStocks} = this.props
-
-    //     if (trackedStocks.length > 0) {
-
-    //     }
-
-    // }
-
     handleTrackedClick = (stock) => {
         let apiKey = process.env.REACT_APP_STOCKS_API_KEY
         fetch(`${this.state.stockFetchUrl}/eod/latest?access_key=${apiKey}&symbols=${stock.stock_symbol}`)
@@ -44,7 +35,6 @@ class TrackedStocksContainer extends Component {
     }
 
     renderStocks = () => {
-        console.log(this.props)
         return this.props.trackedStocks.map((stock, i) => {
             if (i % 3 === 0) {
                 let stocks = this.props.trackedStocks.slice(i, i + 3)

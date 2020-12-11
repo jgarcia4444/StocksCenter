@@ -184,7 +184,7 @@ class VideoContainer extends Component {
                     <div className="row video-thumbnail-row text-center">
                         <div className="col-12 video-col">
                             { this.state.videoDetails ? 
-                                <iframe className="video" width={this.state.videoDetails.width} height={this.state.videoDetails.height} src={this.state.videoDetails.src}></iframe> 
+                                <iframe title={this.state.videoId} className="video" width={this.state.videoDetails.width} height={this.state.videoDetails.height} src={this.state.videoDetails.src}></iframe> 
                                 :
                                 <img src={snippet.thumbnails.medium.url} alt="youtube video thumbnail" />
                             }

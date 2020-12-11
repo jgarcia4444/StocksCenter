@@ -4,11 +4,6 @@ import './VideoFeedContainer.css';
 
 class VideoFeedContainer extends Component {
 
-    constructor(props) {
-        super(props)
-        
-    }
-
     renderVideoContainers = () => {
         return this.props.videos.map(video => {
             return <VideoContainer key={video.id.videoId} video={video} />

@@ -6,7 +6,7 @@ const VideoFeedError = (props) => {
     // More to come different kinds of errors need to be handled.
 
     let {error} = props
-    let { code, message, errors } = error
+    let { errors } = error
     if (errors[0].reason === 'quotaExceeded') {
         return (
             <div className="video-feed-error container">
