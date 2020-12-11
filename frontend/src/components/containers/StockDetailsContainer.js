@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import StockDetails from '../stockDetails/StockDetails';
-import trackStock from '../../actions/TrackStock'
+import trackStock from '../../actions/TrackStock';
+import deleteTrackedStock from '../../actions/DeleteTrackedStock';
 import { connect } from 'react-redux';
 
 class StockDetailsContainer extends Component {
 
     state = {
-        stockInfo: null,
-        BaseUrl: "http://api.marketstack.com/v1",
-        showTrackedAlert: false,
-        trackingMessage: "is now saved in your tracked stocks.",
-        duplicate: false,
-        notSignedIn: false
+            stockInfo: null,
+            BaseUrl: "http://api.marketstack.com/v1",
+            showTrackedAlert: false,
+            trackingMessage: "is now saved in your tracked stocks.",
+            notSignedIn: false,
+            isTracked: false,
+            showDeletionMessage: false,
+            deletionMessage: ""
+        }
+    
+    checkIfStockTracked = () => {
+        let trackedStocksNames = this.props.trackedStocks.map(stock => stock.stock_symbol)
+        if (trackedStocksNames.includes(this.props.stock.symbol)) {
+            return true
+         } else {
+             return false
+         }
     }
 
     componentDidMount() {
@@ -21,11 +33,13 @@ class StockDetailsContainer extends Component {
     fetchStockInfo = () => {
         let key = process.env.REACT_APP_STOCKS_API_KEY
         let { stock } = this.props
+        let isTracked = this.checkIfStockTracked()
         fetch(`${this.state.BaseUrl}/eod/latest?access_key=${key}&symbols=${stock.symbol}`)
         .then(res => res.json())
         .then(json => this.setState({
                 ...this.state,
-                stockInfo: json.data
+                stockInfo: json.data,
+                isTracked: isTracked
         }))
     }
 
@@ -49,16 +63,8 @@ class StockDetailsContainer extends Component {
                     this.setState({
                         ...this.state,
                         showTrackedAlert: true,
-                        duplicate: false,
                         trackingMessage: "is now saved in your tracked stocks."
                     })
-                } else {
-                    this.setState({
-                        ...this.state,
-                        trackingMessage: data.message,
-                        showTrackedAlert: true,
-                        duplicate: true,
-                    })  
                 }
         })
     }
@@ -92,24 +98,83 @@ class StockDetailsContainer extends Component {
     dismissAlert = () => {
         this.setState({
             showTrackedAlert: false,
-            duplicate: false,
             trackingMessage: "is now saved in your tracked stocks."
         })
+    }
+
+    handleUntrackClick = () => {
+        this.props.deleteTrackedStock(this.props.stock.symbol)
+        this.setState({
+            ...this.state,
+            isTracked: false
+        })
+        this.persistTrackedStockRemoval()
+    }
+
+    persistTrackedStockRemoval = () => {
+        let userID = this.props.currentUser.id;
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                user_stock: {
+                    user_id: userID,
+                    stock_symbol: this.props.stock.symbol
+                }
+            })
+        }
+        fetch(`http://localhost:3000/users/${userID}/user_stocks/${this.props.stock.symbol}`, options)
+            .then(res => res.json())
+            .then(data => {
+                if (data.stock_symbol) {
+                    this.setState({
+                        ...this.state,
+                        showDeletionMessage: true,
+                        deletionMessage: data.message,
+                    })
+                    setTimeout(this.resetStockDetailsContainer, 2250)
+                }
+            })
+    }
+
+    resetStockDetailsContainer = () => {
+        this.setState({
+            ...this.state,
+            stockInfo: null,
+            showDeletionMessage: false,
+            deletionMessage: ""
+        })
+        window.location.reload()
     }
 
     render() {
         let {symbol, name} = this.props.stock
         return (
             <div className="stock-details-container container">
-                <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className={this.state.duplicate ? "alert alert-danger alert-dismissible fade show" : "alert alert-primary alert-dismissible fade show"}>
+                <div style={{display: this.state.showTrackedAlert ? 'block' : 'none'}} className="alert alert-primary alert-dismissible fade show">
                     {this.state.notSignedIn ? "" : name} {this.state.trackingMessage}
+                    <button onClick={this.dismissAlert} type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div style={{display: this.state.showDeletionMessage ? 'block' : 'none'}} className="alert alert-danger alert-dismissible fade show">
+                    {this.state.deletionMessage}
                     <button onClick={this.dismissAlert} type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div className="row">
                     <div className="col-6">
-                        <button onClick={this.handleTrackStockClick} className="btn btn-primary">Track stock</button>
+                        {
+                            this.state.isTracked ?
+                            <button className="btn btn-danger" onClick={this.handleUntrackClick}>Untrack Stock</button>
+                            :
+                            <button onClick={this.handleTrackStockClick} className="btn btn-primary">Track stock</button>
+                        }
+                        
                     </div>
                 </div>
                 <div className="row">
@@ -130,11 +195,13 @@ class StockDetailsContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        trackedStocks: state.trackedStocks
     }
 }
 
 export default connect(
     mapStateToProps, 
-    { trackStock }
+    { trackStock,
+    deleteTrackedStock }
 )(StockDetailsContainer)
