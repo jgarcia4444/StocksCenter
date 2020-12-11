@@ -22,14 +22,15 @@ class SignupPageContainer extends Component {
             this.setState({
                 ...this.state,
                 [e.target.name]: e.target.value,
-                passwordNoteColor: "green"
+                passwordNoteColor: "green",
+                passwordValid: true
             })
         } else {
             this.setState({
                 ...this.state,
                 [e.target.name]: e.target.value,
                 passwordNoteColor: "red",
-                passwordValid: true
+                passwordValid: false
             })
         }
     }
@@ -44,25 +45,9 @@ class SignupPageContainer extends Component {
         return newUser
     }
 
-    attemptToSignup = () => {
-        if (this.state.password.length < 8) {
-            this.setState({
-                ...this.state,
-                passwordValid: false
-            })
-        } else {
-            let fetchUrl = "http://localhost:3000/signup"
-            let newUser = this.createUserFromState()
-            let body = JSON.stringify(newUser)
-            let options = {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: body
-            }
-            fetch(fetchUrl, options)
+    postToBackendToSignup = (options) => {
+        let fetchUrl = "http://localhost:3000/signup"
+        fetch(fetchUrl, options)
                 .then(res => res.json())
                 .then(json => {
                     if (json.user.id) {
@@ -80,7 +65,27 @@ class SignupPageContainer extends Component {
                             errorMessages: json
                         })
                     }
-                })
+            })
+    }
+
+    attemptToSignup = () => {
+        if (this.state.password.length < 8) {
+            this.setState({
+                ...this.state,
+                passwordValid: false
+            })
+        } else {
+            let newUser = this.createUserFromState()
+            let body = JSON.stringify(newUser)
+            let options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: body
+            }
+            this.postToBackendToSignup(options)
         }
         
     }
@@ -99,7 +104,7 @@ class SignupPageContainer extends Component {
                 <div className="Home">
                     {this.state.errorMessages ? <p>Email { this.state.errorMessages.email[0] }</p> : null}
                     {this.state.passwordValid === false ? <p>Password must be {8 - this.state.password.length} character{this.state.password.length < 7 ? "s" : ""} longer </p> : null}
-                    <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={(e) => this.handleSubmit(e)} handleInputChange={(e) => this.handleInputChange(e)} />
+                    <SignupForm passwordNoteColor={this.state.passwordNoteColor} handleFormSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} />
                 </div>
             ) 
         }

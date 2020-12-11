@@ -41,7 +41,11 @@ const SignupForm = (props) => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">Signup</button>
+                <div className="row text-center">
+                    <div className="col-12">
+                        <button type="submit" className="btn btn-primary">Signup</button>
+                    </div>
+                </div>
             </form>
         </div>
     )
