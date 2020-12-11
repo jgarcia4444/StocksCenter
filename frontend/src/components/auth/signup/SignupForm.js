@@ -16,13 +16,13 @@ const SignupForm = (props) => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="firstName">First Name</label>
-                            <input name="firstName" type="text" className="form-control" onChange={ props.handleInputChange}/>
+                            <input id="firstName" name="firstName" type="text" className="form-control" onChange={ props.handleInputChange}/>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="lastName">Last Name</label>
-                            <input type="text" name="lastName" className="form-control" onChange={ props.handleInputChange}/>
+                            <input id="lastName" type="text" name="lastName" className="form-control" onChange={ props.handleInputChange}/>
                         </div>
                     </div>
                 </div>
@@ -30,13 +30,13 @@ const SignupForm = (props) => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
-                            <input type="email" className="form-control" name="email" onChange={ props.handleInputChange}/>
+                            <input id="email" type="email" className="form-control" name="email" onChange={ props.handleInputChange}/>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" name="password" className="form-control" aria-describedby="passwordHelp" onChange={ props.handleInputChange}/>
+                            <input id="password" type="password" name="password" className="form-control" aria-describedby="passwordHelp" onChange={ props.handleInputChange}/>
                             <small id="passwordHelp" className="form-text" style={{color : props.passwordNoteColor}}>Password must be 8 characters long.</small>
                         </div>
                     </div>
