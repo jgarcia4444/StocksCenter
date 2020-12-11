@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import StockRow from '../trackedStocks/StockRow';
 import './TrackedStocksContainer.css'
 import StockDetails from '../stockDetails/StockDetails';
 import deleteTrackedStock from '../../actions/DeleteTrackedStock';
+import StockTile from '../trackedStocks/StockTile';
 
 class TrackedStocksContainer extends Component {
 
@@ -36,12 +36,7 @@ class TrackedStocksContainer extends Component {
 
     renderStocks = () => {
         return this.props.trackedStocks.map((stock, i) => {
-            if (i % 3 === 0) {
-                let stocks = this.props.trackedStocks.slice(i, i + 3)
-                return <StockRow handleTrackedClick={this.handleTrackedClick} key={`${stock.stock_symbol}${stock.id}`} stocks={stocks} />
-            } else {
-                return null
-            }
+            return <StockTile handleTrackedClick={this.handleTrackedClick} stock={stock} key={i} />
         })
     }
 
@@ -69,8 +64,6 @@ class TrackedStocksContainer extends Component {
                     })
                     setTimeout(this.setStockInfoToNull, 2250)
                     this.props.deleteTrackedStock(data.stock_symbol)
-                } else {
-//
                 }
             })
     }
@@ -88,7 +81,7 @@ class TrackedStocksContainer extends Component {
             return (
                     <div className="container">
                         <h4 id="tracked-stocks-title">Tracked Stocks</h4>
-                        <div className="tracked-stocks-container">
+                        <div className="row tracked-stocks-container">
                             {this.renderStocks()}
                         </div> 
                     </div> 

@@ -7,48 +7,38 @@
     background: -ms-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
     background: -o-linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
     background: linear-gradient(to bottom right,#2d3436, #636e72, #b2bec3, #dfe6e9, #b2bec3, #636e72, #2d3436);
+    box-shadow: 0 0 3px 0 black;
 }
 
 .filter-option:hover {
     cursor: pointer;
+    box-shadow: 0 0 7px 0 black;
+    animation-name: Animate-Filters;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+}
+
+@keyframes Animate-Filters {
+    from {
+        box-shadow: 0 0 3px 0 black;
+    }
+    to {
+        box-shadow: 0 0 7px 0 black;
+    }
 }
 
 .filter-option:first-child {
-    border: 3px solid #0984e3;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-}
-
-.filter-option:first-child:hover {
-    box-shadow: -1px 1px 3px 0 black;
-}
-
-.filter-option:first-child:active {
-    box-shadow: none;
+    
 }
 
 .filter-option:last-child {
-    border: 3px solid #0984e3;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.filter-option:last-child:hover {
-    box-shadow: 1px 1px 3px 0 black;
-}
 
-.filter-option:last-child:active {
-    box-shadow: none;
-}
-
-.filter-option:nth-child(2) {
-    border-top: 3px solid #0984e3;
-    border-bottom: 3px solid #0984e3;
-}
-
-.filter-option:nth-child(2):hover {
-    box-shadow: 0 1px 3px 0 black;
-}
 
 .filter-option:nth-child(2):active {
     box-shadow: none;

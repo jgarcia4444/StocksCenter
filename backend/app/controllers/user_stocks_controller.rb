@@ -1,6 +1,7 @@
 class UserStocksController < ApplicationController 
 
     def create
+        puts params
         if !params[:user_id]
             render :json => {message: "You must be have an account and be signed in to track a stock."}
         else
@@ -38,7 +39,7 @@ class UserStocksController < ApplicationController
 
     private 
         def user_stocks_params
-            params.permit(:user_id, :stock_symbol)
+            params.require(:user_stock).permit(:user_id, :stock_symbol)
         end
 
 end

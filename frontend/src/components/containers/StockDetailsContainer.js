@@ -15,6 +15,10 @@ class StockDetailsContainer extends Component {
     }
 
     componentDidMount() {
+        this.fetchStockInfo()
+    }
+
+    fetchStockInfo = () => {
         let key = process.env.REACT_APP_STOCKS_API_KEY
         let { stock } = this.props
         fetch(`${this.state.BaseUrl}/eod/latest?access_key=${key}&symbols=${stock.symbol}`)
@@ -22,28 +26,22 @@ class StockDetailsContainer extends Component {
         .then(json => this.setState({
                 ...this.state,
                 stockInfo: json.data
-            }))
-
+        }))
     }
 
-    handleTrackStockClick = () => {
+    setupJSONUserStock = () => {
         let { stock } = this.props
         let { id } = this.props.currentUser
-        
-        const jsonUserStock = JSON.stringify({
-            user_id: id,
-            stock_symbol: stock.symbol
+        return JSON.stringify({
+            user_stock: {
+                user_id: id,
+                stock_symbol: stock.symbol
+            }
         })
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: jsonUserStock
-        }
-        if (id) {
-            fetch(`http://localhost:3000/users/${id}/user_stocks`, options)
+    }
+
+    postTrackedStockToBackend = (userId, options) => {
+        fetch(`http://localhost:3000/users/${userId}/user_stocks`, options)
             .then(res => res.json())
             .then(data => {
                 if (data.userStocks) {
@@ -62,15 +60,33 @@ class StockDetailsContainer extends Component {
                         duplicate: true,
                     })  
                 }
-            })
-        } else {
-            this.setState({
-                ...this.state,
-                trackingMessage: "You must have an account and be signed in to track stocks.",
-                showTrackedAlert: true,
-                notSignedIn: true
-            })
+        })
+    }
+
+    handleTrackStockClick = () => {
+        const jsonUserStock = this.setupJSONUserStock()
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: jsonUserStock
         }
+        if (this.props.currentUser.id) {
+            this.postTrackedStockToBackend(this.props.currentUser.id, options)
+        } else {
+            this.promptUserToSignIn()
+        }
+    }
+
+    promptUserToSignIn = () => {
+        this.setState({
+            ...this.state,
+            trackingMessage: "You must have an account and be signed in to track stocks.",
+            showTrackedAlert: true,
+            notSignedIn: true
+        })
     }
 
     dismissAlert = () => {

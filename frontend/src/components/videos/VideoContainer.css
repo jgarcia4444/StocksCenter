@@ -10,9 +10,10 @@
 
 .video-container {
     width: 80%;
-    box-shadow: 0 5px 5px 0 black;
+    
     margin: 5% auto;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
+    border-bottom: 1px solid black;
 }
 
 .video-description-row {
@@ -32,9 +33,6 @@
 }
 
 .video {
-    box-shadow: 0 7px 5px 0 black;
-    border-bottom: 4px solid black;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-    border-top: 1px solid black;
+    box-shadow: 0 0px 5px 0 black;
+    border: none;
 }

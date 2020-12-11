@@ -3,17 +3,17 @@ import Suggestion from '../suggestion/Suggestion';
 
 export default class SuggestionsContainer extends Component {
     
-    constructor(props) {
-        super(props)
-        this.state = {
+        state = {
             hasSuggestions: false,
             BaseUrl: "http://api.marketstack.com/v1",
             selectedStock: {}
         }
-    }
-    
 
     componentDidMount() {
+        this.checkForSuggestions()
+    }
+
+    checkForSuggestions = () => {
         if (this.props.suggestions !== []) {
             this.setState({
                 hasSuggestions: true
@@ -38,7 +38,7 @@ export default class SuggestionsContainer extends Component {
     handleClick = (stock) => {
         this.props.setSelectedStock(stock)
     }
-//
+
     render() {
         if (this.state.hasSuggestions) {
             return (

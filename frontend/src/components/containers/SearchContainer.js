@@ -71,8 +71,6 @@ export default class SearchContainer extends Component {
                         suggestions: suggestions,
                         searchQuery: query
                     })
-                } else {
-                    console.log("No suggestions. after selected stock")
                 }
             } else {
                 this.setState({

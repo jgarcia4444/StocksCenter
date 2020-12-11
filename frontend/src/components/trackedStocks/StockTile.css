@@ -1,15 +1,21 @@
 .stock-tile {
     text-align: center;
     background-image: linear-gradient(to bottom right, #0984e3, #74b9ff, #dfe6e9, #74b9ff, #0984e3);
-    padding: 10%;
+    height: 100px;
+    box-shadow: 0 0 3px 0 black;
+    margin-top: 10%;
 }
 
 .stock-tile:hover {
     animation: Tracked-Stocks-Hover;
-    animation-duration: 0.5s;
-    box-shadow: 5px 5px 5px 0 black;
-    border: 2px solid white;
+    animation-duration: 0.25s;
+    box-shadow: 0 0 7px 0 black;
     cursor: pointer;
+}
+
+.tracked-stock-symbol {
+    position: relative;
+    top: 35px;
 }
 
 @keyframes Tracked-Stocks-Hover {
@@ -17,6 +23,6 @@
         box-shadow: none;
     }
     to {
-        box-shadow: 5px 5px 5px 0 black;
+        box-shadow: 0 0 7px 0 black;
     }
 }

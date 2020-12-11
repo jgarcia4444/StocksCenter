@@ -1,13 +1,13 @@
 .suggestion-conatiner {
     margin-bottom: 10px;
     background-image: linear-gradient(to bottom right, #0984e3, #74b9ff, #dfe6e9, #74b9ff, #0984e3);
+    box-shadow: 0 0 3px 0 black;
 }
 
 .suggestion-conatiner:hover {
     animation: Suggested-Stocks-Hover;
-    animation-duration: 0.5s;
-    box-shadow: 5px 5px 5px 0 black;
-    border: 2px solid white;
+    animation-duration: 0.25s;
+    box-shadow: 0 0 7px 0 black;
     cursor: pointer;
 }
 
@@ -16,6 +16,6 @@
         box-shadow: none;
     }
     to {
-        box-shadow: 5px 5px 5px 0 black;
+        box-shadow: 0 0 7px 0 black;
     }
 }
