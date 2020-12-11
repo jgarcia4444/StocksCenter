@@ -14,22 +14,16 @@ class LoginPageContainer extends Component {
         redirect: ""
     }
 
-    handleLoginSubmit = (e) => {
-        e.preventDefault();
-        const loginJson = JSON.stringify({
+    setupLoginInfoForBackend = () => {
+        return JSON.stringify({
             login_data: {
                 email: this.state.email,
                 password: this.state.password
             }
         })
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: loginJson
-        }
+    }
+
+    postLoginAttemotToBackend = (options) => {
         fetch(this.state.fetchUrl, options)
             .then(res => res.json())
             .then(data => {
@@ -45,7 +39,20 @@ class LoginPageContainer extends Component {
                     })
                     this.refreshPage()
                 }
-            })
+        })
+    }
+    handleLoginSubmit = (e) => {
+        e.preventDefault();
+        const loginJson = this.setupLoginInfoForBackend()
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: loginJson
+        }
+        this.postLoginAttemotToBackend(options)
     }
 
     refreshPage = () => {
@@ -71,12 +78,11 @@ class LoginPageContainer extends Component {
             return <Redirect to={this.state.redirect} />
         } else {
             return (
-                    <div className="Home">
-                        <LoginForm errorMessage={this.state.errorMessage} email={this.state.email} password={this.state.password} handleLoginSubmit={this.handleLoginSubmit} handleInputChange={this.handleInputChange}/>
-                    </div>
-                )  
+                <div className="Home">
+                    <LoginForm errorMessage={this.state.errorMessage} email={this.state.email} password={this.state.password} handleLoginSubmit={this.handleLoginSubmit} handleInputChange={this.handleInputChange}/>
+                </div>
+            )  
         }
-        
     }
 
 }
