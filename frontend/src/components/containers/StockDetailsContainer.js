@@ -196,7 +196,8 @@ class StockDetailsContainer extends Component {
 const mapStateToProps = state => {
     return {
         currentUser: state.currentUser,
-        trackedStocks: state.trackedStocks
+        trackedStocks: state.trackedStocks,
+        searchSelectedStock: state.searchSelectedStock
     }
 }
 

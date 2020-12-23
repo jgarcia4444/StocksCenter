@@ -1,10 +1,11 @@
 const defaultState = {
     currentUser: {},
+    searchSelectedStock: {},
     stocks: [],
     trackedStocks: [],
     userVideoIds: [],
     videosToDisplay: [],
-    loading: false
+    loadingStocks: false
 }
 
 //
@@ -12,15 +13,20 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
     var stocks;
     switch(action.type) {
+        case "SELECT_SEARCH_STOCK":
+            return {
+                ...state,
+                searchSelectedStock: action.stock
+            }
         case "FETCHING_STOCKS":
             return {
                 ...state,
-                loading: true
+                loadingStocks: true
             }
         case "ADD_STOCKS":
             return {
                 ...state,
-                loading: false,
+                loadingStocks: false,
                 stocks: action.stocks
             }
         case "TRACK_STOCK":
@@ -83,11 +89,11 @@ export default function reducer(state = defaultState, action) {
                 ...state,
                 videosToDisplay: state.videosToDisplay.filter(video => video.id.videoId !== action.videoId)
             }
-            case "LOAD_VIDEOS_TO_DISPLAY":
-                return {
-                    ...state,
-                    videosToDisplay: action.videosToDisplay
-                }
+        case "LOAD_VIDEOS_TO_DISPLAY":
+            return {
+                ...state,
+                videosToDisplay: action.videosToDisplay
+            }
         default:
             return state
     }

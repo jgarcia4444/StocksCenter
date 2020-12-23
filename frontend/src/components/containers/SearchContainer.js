@@ -47,13 +47,6 @@ class SearchContainer extends Component {
         this.filterByQuery(query)
     }
 
-    setSelectedStock = (stock) => {
-        this.setState({
-            ...this.state,
-            selectedStock: stock,
-            searchQuery: ""
-        })
-    }
 
     filterByQuery = (query) => {
         const { stocks } = this.props
@@ -96,12 +89,12 @@ class SearchContainer extends Component {
         const loadingOverlay = <div className="loading-overlay"><div className="spinner"></div></div>
         return (
             <div className="container search-container">
-                {this.props.loading ? loadingOverlay : null}
+                {this.props.loadingStocks ? loadingOverlay : null}
                 <h3>Search Stocks</h3>
-                <SearchBar searchValue={this.state.searchQuery} suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
+                <SearchBar searchValue={this.state.searchQuery} setSearchQuery={this.handleInputChange} />
                 <h4>{this.state.selectedStock ? null : "Suggestions"}</h4>
                 <div className="suggestions-component">
-                    {this.state.selectedStock !== null ? <StockDetailsContainer stock={this.state.selectedStock} /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
+                    {this.state.selectedStock !== null ? <StockDetailsContainer stock={this.props.searchselectedStock} /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
                 </div>
             </div>
         )
@@ -118,7 +111,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         stocks: state.stocks,
-        loading: state.loading
+        loadingStocks: state.loadingStocks,
+        searchSelectedStock: state.searchSelectedStock
     }
 }
 

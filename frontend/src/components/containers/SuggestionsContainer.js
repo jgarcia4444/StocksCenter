@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import setSearchStock from '../../actions/setSearchStock';
 import Suggestion from '../suggestion/Suggestion';
 
-export default class SuggestionsContainer extends Component {
+class SuggestionsContainer extends Component {
     
         state = {
             hasSuggestions: false,
-            BaseUrl: "http://api.marketstack.com/v1",
-            selectedStock: {}
         }
 
     componentDidMount() {
@@ -36,7 +36,7 @@ export default class SuggestionsContainer extends Component {
     }
 
     handleClick = (stock) => {
-        this.props.setSelectedStock(stock)
+        this.props.setSearchStock(stock)
     }
 
     render() {
@@ -55,5 +55,14 @@ export default class SuggestionsContainer extends Component {
     
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setSearchStock: (stock) => dispatch(setSearchStock(stock))
+    }
+}
 
-
+export default connect(
+    null,
+    mapDispatchToProps
+)
+(SuggestionsContainer);
