@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import './SearchContainer.css';
 import SearchBar from '../searchBar/SearchBar';
 import SuggestionsContainer from './SuggestionsContainer';
 import StockDetailsContainer from './StockDetailsContainer';
+import fetchStocks from '../../actions/fetchStocks';
+import { connect } from 'react-redux';
 
-export default class SearchContainer extends Component {
+class SearchContainer extends Component {
 
     fetchSearchStock = () => {
         let apiKey = process.env.REACT_APP_STOCKS_API_KEY
@@ -17,7 +20,6 @@ export default class SearchContainer extends Component {
     constructor() {
         super()
         this.state = {
-            baseUrl: "http://api.marketstack.com/v1",
             searchQuery: "",
             stocksData: [],
             suggestions: [],
@@ -27,7 +29,7 @@ export default class SearchContainer extends Component {
     }
 
     componentDidMount() {
-        this.fetchSearchStock()
+        this.props.fetchStocks()
     }
 
     handleFormSubmitted = (e) => {
@@ -54,8 +56,9 @@ export default class SearchContainer extends Component {
     }
 
     filterByQuery = (query) => {
+        const { stocks } = this.props
         if (query !== "") {
-           let suggestions = this.state.stocksData.filter(stock => {
+           let suggestions = stocks.filter(stock => {
                 let stockNameLowercased = stock.name.toLowerCase()
                 if (stockNameLowercased.includes(query.toLowerCase())) {
                     return true;
@@ -90,8 +93,10 @@ export default class SearchContainer extends Component {
     }
 
     render() {
+        const loadingOverlay = <div className="loading-overlay"><div className="spinner"></div></div>
         return (
             <div className="container search-container">
+                {this.props.loading ? loadingOverlay : null}
                 <h3>Search Stocks</h3>
                 <SearchBar searchValue={this.state.searchQuery} suggestions={this.state.suggestions} setSearchQuery={this.handleInputChange} fetchSearchData={this.handleFormSubmitted} />
                 <h4>{this.state.selectedStock ? null : "Suggestions"}</h4>
@@ -103,3 +108,22 @@ export default class SearchContainer extends Component {
     }
 
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchStocks: () => dispatch(fetchStocks())
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        stocks: state.stocks,
+        loading: state.loading
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
+(SearchContainer);

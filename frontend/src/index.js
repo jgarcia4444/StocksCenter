@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import {createStore} from 'redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/reducer';
 
 let store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer, applyMiddleware(thunk)
   )
 
 ReactDOM.render(

@@ -1,13 +1,28 @@
 const defaultState = {
     currentUser: {},
+    stocks: [],
     trackedStocks: [],
     userVideoIds: [],
     videosToDisplay: [],
+    loading: false
 }
+
+//
 
 export default function reducer(state = defaultState, action) {
     var stocks;
     switch(action.type) {
+        case "FETCHING_STOCKS":
+            return {
+                ...state,
+                loading: true
+            }
+        case "ADD_STOCKS":
+            return {
+                ...state,
+                loading: false,
+                stocks: action.stocks
+            }
         case "TRACK_STOCK":
             if (state.trackedStocks.length > 0) {
                 stocks = state.trackedStocks
