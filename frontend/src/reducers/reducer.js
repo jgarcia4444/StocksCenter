@@ -1,11 +1,13 @@
 const defaultState = {
     currentUser: {},
     searchSelectedStock: {},
+    searchStockInfo: {},
     stocks: [],
     trackedStocks: [],
     userVideoIds: [],
     videosToDisplay: [],
-    loadingStocks: false
+    loadingStocks: false,
+    loadingSuggestedStockInfo: false
 }
 
 //
@@ -13,6 +15,18 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
     var stocks;
     switch(action.type) {
+        case "FETCHED_SUGGESTED_STOCK_INFO":
+            console.log(action.stockInfo)
+            return {
+                ...state,
+                searchStockInfo: action.stockInfo,
+                loadingSuggestedStockInfo: false
+            }
+        case "FETCHING__SUGGESTED_STOCK_DETAILS":
+            return {
+                ...state,
+                loadingSuggestedStockInfo: true
+            }
         case "SELECT_SEARCH_STOCK":
             return {
                 ...state,

@@ -3,12 +3,11 @@ import StockDetails from '../stockDetails/StockDetails';
 import trackStock from '../../actions/TrackStock';
 import deleteTrackedStock from '../../actions/DeleteTrackedStock';
 import { connect } from 'react-redux';
+import fetchStockInfo from '../../actions/fetchStockInfo';
 
 class StockDetailsContainer extends Component {
 
     state = {
-            stockInfo: null,
-            BaseUrl: "http://api.marketstack.com/v1",
             showTrackedAlert: false,
             trackingMessage: "is now saved in your tracked stocks.",
             notSignedIn: false,
@@ -18,8 +17,9 @@ class StockDetailsContainer extends Component {
         }
     
     checkIfStockTracked = () => {
-        let trackedStocksNames = this.props.trackedStocks.map(stock => stock.stock_symbol)
-        if (trackedStocksNames.includes(this.props.stock.symbol)) {
+        let {stock} = this.props;
+        let trackedStocksSymbols = this.props.trackedStocks.map(stock => stock.stock_symbol)
+        if (trackedStocksSymbols.includes(stock.symbol)) {
             return true
          } else {
              return false
@@ -31,16 +31,9 @@ class StockDetailsContainer extends Component {
     }
 
     fetchStockInfo = () => {
-        let key = process.env.REACT_APP_STOCKS_API_KEY
-        let { stock } = this.props
+        let {stock}  = this.props;
         let isTracked = this.checkIfStockTracked()
-        fetch(`${this.state.BaseUrl}/eod/latest?access_key=${key}&symbols=${stock.symbol}`)
-        .then(res => res.json())
-        .then(json => this.setState({
-                ...this.state,
-                stockInfo: json.data,
-                isTracked: isTracked
-        }))
+        this.props.fetchStockInfo(stock)
     }
 
     setupJSONUserStock = () => {
@@ -151,6 +144,7 @@ class StockDetailsContainer extends Component {
     }
 
     render() {
+        let loadingOverlay = <div className="loading-overlay"><div className="spinner"></div></div>
         let {symbol, name} = this.props.stock
         return (
             <div className="stock-details-container container">
@@ -187,7 +181,7 @@ class StockDetailsContainer extends Component {
                         <h5>{name}</h5>
                     </div>
                 </div>
-                {this.state.stockInfo ? <StockDetails stockInfo={this.state.stockInfo[0]} /> : null}
+                {this.props.loadingSuggestedStockInfo ? loadingOverlay : <StockDetails />}
             </div>
         )
     }
@@ -197,12 +191,21 @@ const mapStateToProps = state => {
     return {
         currentUser: state.currentUser,
         trackedStocks: state.trackedStocks,
-        searchSelectedStock: state.searchSelectedStock
+        stock: state.searchSelectedStock,
+        loadingSuggestedStockInfo: state.loadingSuggestedStockInfo,
+        stockInfo: state.searchStockInfo
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        trackStock: (stock) => dispatch(trackStock(stock)),
+        deleteTrackedStock: (stockSymbol) => dispatch(deleteTrackedStock(stockSymbol)),
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
     }
 }
 
 export default connect(
     mapStateToProps, 
-    { trackStock,
-    deleteTrackedStock }
+    mapDispatchToProps
 )(StockDetailsContainer)

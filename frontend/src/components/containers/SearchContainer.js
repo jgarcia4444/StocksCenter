@@ -8,20 +8,12 @@ import { connect } from 'react-redux';
 
 class SearchContainer extends Component {
 
-    fetchSearchStock = () => {
-        let apiKey = process.env.REACT_APP_STOCKS_API_KEY
-        fetch(`${this.state.baseUrl}/tickers?access_key=${apiKey}`)
-            .then(res => res.json())
-            .then(json => this.setState({
-                stocksData: json.data
-            }))
-    }
+    
 
     constructor() {
         super()
         this.state = {
             searchQuery: "",
-            stocksData: [],
             suggestions: [],
             selectedStock: null
         }
@@ -87,14 +79,16 @@ class SearchContainer extends Component {
 
     render() {
         const loadingOverlay = <div className="loading-overlay"><div className="spinner"></div></div>
+        const { searchSelectedStock } = this.props
+        console.log(searchSelectedStock);
         return (
             <div className="container search-container">
                 {this.props.loadingStocks ? loadingOverlay : null}
                 <h3>Search Stocks</h3>
                 <SearchBar searchValue={this.state.searchQuery} setSearchQuery={this.handleInputChange} />
-                <h4>{this.state.selectedStock ? null : "Suggestions"}</h4>
+                <h4>{searchSelectedStock.keys !== undefined ? null : "Suggestions"}</h4>
                 <div className="suggestions-component">
-                    {this.state.selectedStock !== null ? <StockDetailsContainer stock={this.props.searchselectedStock} /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
+                    {searchSelectedStock.keys !== undefined ? <StockDetailsContainer /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
                 </div>
             </div>
         )
