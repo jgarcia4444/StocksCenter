@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import setSearchStock from '../../actions/setSearchStock';
+import fetchStockInfo from '../../actions/fetchStockInfo';
 import Suggestion from '../suggestion/Suggestion';
 
 class SuggestionsContainer extends Component {
@@ -36,7 +36,7 @@ class SuggestionsContainer extends Component {
     }
 
     handleClick = (stock) => {
-        this.props.setSearchStock(stock)
+        this.props.fetchStockInfo(stock)
     }
 
     render() {
@@ -57,7 +57,7 @@ class SuggestionsContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setSearchStock: (stock) => dispatch(setSearchStock(stock))
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
     }
 }
 

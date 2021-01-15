@@ -1,5 +1,6 @@
 import React from 'react';
 import './StockDetails.css'
+import {connect} from 'react-redux';
 
 const StockDetails = (props) => {
     let {
@@ -135,4 +136,13 @@ const StockDetails = (props) => {
 
 }
 
-export default StockDetails;
+const mapStateToProps = state => {
+    return {
+        stockInfo: state.searchStockInfo
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(StockDetails);

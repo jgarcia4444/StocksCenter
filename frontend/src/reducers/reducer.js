@@ -10,13 +10,10 @@ const defaultState = {
     loadingSuggestedStockInfo: false
 }
 
-//
-
 export default function reducer(state = defaultState, action) {
     var stocks;
     switch(action.type) {
         case "FETCHED_SUGGESTED_STOCK_INFO":
-            console.log(action.stockInfo)
             return {
                 ...state,
                 searchStockInfo: action.stockInfo,
@@ -25,13 +22,14 @@ export default function reducer(state = defaultState, action) {
         case "FETCHING__SUGGESTED_STOCK_DETAILS":
             return {
                 ...state,
-                loadingSuggestedStockInfo: true
-            }
-        case "SELECT_SEARCH_STOCK":
-            return {
-                ...state,
+                loadingSuggestedStockInfo: true,
                 searchSelectedStock: action.stock
             }
+        // case "SELECT_SEARCH_STOCK":
+        //     return {
+        //         ...state,
+        //         searchSelectedStock: action.stock
+        //     }
         case "FETCHING_STOCKS":
             return {
                 ...state,

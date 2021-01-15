@@ -8,24 +8,14 @@ import { connect } from 'react-redux';
 
 class SearchContainer extends Component {
 
-    
-
-    constructor() {
-        super()
-        this.state = {
-            searchQuery: "",
-            suggestions: [],
-            selectedStock: null
-        }
-        
+    state = {
+        searchQuery: "",
+        suggestions: [],
+        selectedStock: null
     }
 
     componentDidMount() {
         this.props.fetchStocks()
-    }
-
-    handleFormSubmitted = (e) => {
-        e.preventDefault();
     }
 
     handleInputChange = (e) => {
@@ -80,15 +70,14 @@ class SearchContainer extends Component {
     render() {
         const loadingOverlay = <div className="loading-overlay"><div className="spinner"></div></div>
         const { searchSelectedStock } = this.props
-        console.log(searchSelectedStock);
         return (
             <div className="container search-container">
-                {this.props.loadingStocks ? loadingOverlay : null}
+                {this.props.loadingStocks || this.props.loadingSuggestedStockInfo ? loadingOverlay : null}
                 <h3>Search Stocks</h3>
                 <SearchBar searchValue={this.state.searchQuery} setSearchQuery={this.handleInputChange} />
                 <h4>{searchSelectedStock.keys !== undefined ? null : "Suggestions"}</h4>
                 <div className="suggestions-component">
-                    {searchSelectedStock.keys !== undefined ? <StockDetailsContainer /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
+                    {Object.keys(searchSelectedStock).length !== 0 ? <StockDetailsContainer /> : <SuggestionsContainer setSelectedStock={this.setSelectedStock} suggestions={this.state.suggestions} />}
                 </div>
             </div>
         )
